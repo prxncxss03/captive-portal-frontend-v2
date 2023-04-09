@@ -1,5 +1,5 @@
 import { Box, Container,  Typography } from '@mui/material'
-import { Login } from './components/pages/login/Login'
+import { Login } from './components/pages/auth/Login'
 
 function App() {
 

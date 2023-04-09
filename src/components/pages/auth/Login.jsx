@@ -12,12 +12,11 @@ import {
   Typography
 } from '@mui/material';
 import axios from 'axios';
-
+import { API_URL } from '../../general/config';
 
 
 export const Login = () => {
 
-  const API_URL = import.meta.env.VITE_BASE_URL
 
   const formik = useFormik({
     initialValues: {
