@@ -19,7 +19,7 @@ import { Register } from './components/pages/auth/Register';
 import { NotFound } from './components/pages/placeholder/NotFound';
 import { AccountPending } from './components/pages/placeholder/AccountPending';
 import {Home} from './components/pages/admin/home';
-import { Students } from './components/pages/admin/Students';
+import { Students } from './components/pages/admin/students/Students';
 import { Dashboard } from './components/pages/admin/Dashboard';
 import {PrivateRoutes} from './components/utils/PrivateRoutes';
 
