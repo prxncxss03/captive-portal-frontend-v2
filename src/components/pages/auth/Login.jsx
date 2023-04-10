@@ -54,8 +54,8 @@ export const Login = () => {
           console.log(response.data)
           localStorage.setItem('token', response.data.access_token);
           console.log('token', localStorage.getItem('token'));
-          localStorage.setItem('user', response.data.user)
-          localStorage.setItem('isAuthenticated', true);
+          localStorage.setItem('user', JSON.stringify(response.data.user));
+          
           navigate('/admin');
          
         }).catch((error) => {

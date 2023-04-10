@@ -24,6 +24,7 @@ import { Dashboard } from './components/pages/admin/Dashboard';
 import {PrivateRoutes} from './components/utils/PrivateRoutes';
 import { PendingAccounts } from './components/pages/admin/PendingAccounts';
 import { Faculty } from './components/pages/admin/Faculty';
+import { Settings } from './components/pages/Settings';
 
  
 export function createTheme() {
@@ -115,6 +116,13 @@ export function createTheme() {
             <Faculty />
           </PrivateRoutes>
 
+        },
+        {
+          path: '/admin/settings',
+          element:
+          <PrivateRoutes>
+            <Settings />
+          </PrivateRoutes>
         }
       ]
     }

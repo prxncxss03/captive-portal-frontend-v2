@@ -4,7 +4,7 @@ import {
     FaBookReader
 }from "react-icons/fa";
 
-import {RiDashboardFill} from "react-icons/ri";
+import {RiDashboardFill,RiSettings4Fill} from "react-icons/ri";
 import {MdPendingActions} from "react-icons/md";
 
 export const adminSidebarData = [
@@ -28,5 +28,10 @@ export const adminSidebarData = [
         path:"/admin/pending-accounts",
         name:"Pending Accounts",
         icon: <MdPendingActions size={19}/>
+    },
+    {
+        path:"/admin/settings",
+        name:"Settings",
+        icon: <RiSettings4Fill size={18}/>
     }
 ]
