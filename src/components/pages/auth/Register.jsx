@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 import { Box, Button,Checkbox, Link, Stack, TextField, Typography, FormControl, InputLabel,Select, MenuItem } from '@mui/material';
 import axios from 'axios';
 import { API_URL } from '../../general/config';
+import { useNavigate } from 'react-router-dom';
 
 export const Register = () => {
 
@@ -65,7 +66,7 @@ export const Register = () => {
 
         }).then((response) => {
           console.log(response.data);
-          router.push('/forApproval');
+          useNavigate('/account-pending')
         }).catch((error) => {
           console.log(error);
           helpers.setStatus({ success: false });
@@ -117,6 +118,9 @@ export const Register = () => {
                 Already have an account?
                 &nbsp;
                 <Link
+                onClick={
+                  useNavigate('/auth/login')
+                }
                   href="/auth/login"
                   underline="hover"
                   variant="subtitle2"

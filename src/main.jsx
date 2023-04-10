@@ -12,14 +12,19 @@ import { createShadows } from './theme/shadows';
 import {createComponents} from './theme/components';
 import {createTypography} from './theme/typography';
 
+
+//pages
+import {Login} from './components/pages/auth/Login';
+import { Register } from './components/pages/auth/Register';
+import { NotFound } from './components/pages/placeholder/NotFound';
+import { AccountPending } from './components/pages/placeholder/AccountPending';
+
  
 export function createTheme() {
-  console.log('this is createTheme')
   const palette = createPalette();
   const components = createComponents({ palette });
   const shadows = createShadows();
   const typography = createTypography();
-  console.log(typography)
 
   return createATheme({
     breakpoints: {
@@ -47,7 +52,25 @@ export function createTheme() {
       path: "/",
       element: <App />,
     },
+    {
+      path: "/auth/login",
+      element: <Login />,
+    },
+    {
+      path: "/auth/register",
+      element: <Register />,
+    },
+    {
+      path: "*",
+      element: <NotFound />,
+    },
+    {
+      path: '/account-pending',
+      element: <AccountPending />,
+    }
   ]);
+
+  
 
 const theme = createTheme();
 

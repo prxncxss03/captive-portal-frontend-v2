@@ -13,6 +13,9 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import { API_URL } from '../../general/config';
+import { useNavigate } from 'react-router-dom';
+
+//pages
 
 
 export const Login = () => {
@@ -51,6 +54,8 @@ export const Login = () => {
           console.log('token', localStorage.getItem('token'));
           localStorage.setItem('user', response.data.user)
           localStorage.setItem('isAuthenticated', true);
+     
+
          
         }).catch((error) => {
           console.log(error);
@@ -101,9 +106,13 @@ export const Login = () => {
               Don&apos;t have an account?
               &nbsp;
               <Link
+
                 href="/auth/register"
                 underline="hover"
                 variant="subtitle2"
+                onClick={
+                  useNavigate('/auth/register')
+                }
               >
                 Register
               </Link>
