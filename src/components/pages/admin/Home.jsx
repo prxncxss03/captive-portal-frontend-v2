@@ -107,7 +107,7 @@ export const Home = () => {
                             {
                     adminSidebarData.map((item, index)=>(
                         <NavLink to={item.path}  key={index}   className="link" >
-                       
+                            <Stack direction="row" alignItems="center" spacing={2} sx={{ p: 2 }}>
                                     {item.icon}
 
                                     <Box sx={{
@@ -120,6 +120,8 @@ export const Home = () => {
                                             {item.name}
                                         </Typography>
                                     </Box>
+                            </Stack>
+                       
                     </NavLink>
                     ))
                 }

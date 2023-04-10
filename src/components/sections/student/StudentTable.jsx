@@ -8,7 +8,6 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TablePagination,
   TableRow,
   Typography
 } from '@mui/material';

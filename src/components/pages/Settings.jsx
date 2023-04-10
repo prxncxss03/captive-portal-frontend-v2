@@ -14,12 +14,13 @@ import {
 
 export const Settings = () => {
   let user = JSON.parse(localStorage.getItem('user'));
+  console.log(user)
 
   const [values, setValues] = useState({
-    firstName: user.first_name,
-    lastName: user.last_name,
-    email: user.email,
-    password: "",
+    firstName: user.first_name ? user.first_name : '',
+    lastName: user.last_name ? user.last_name : '',
+    email: user.email ? user.email : '',
+
   });
 
   const handleChange = useCallback(
@@ -39,7 +40,7 @@ export const Settings = () => {
     []
   );
 
-  return (
+  return(
     <form
       autoComplete="off"
       noValidate
@@ -96,19 +97,7 @@ export const Settings = () => {
                   value={values.email}
                 />
               </Grid>
-              <Grid
-                xs={12}
-                md={6}
-              >
-                <TextField
-                  fullWidth
-                  label="Password"
-                  name="password"
-                  onChange={handleChange}
-                  type="password"
-                  value={values.password}
-                />
-              </Grid>
+           
               <Grid
                 xs={12}
                 md={6}
@@ -118,6 +107,9 @@ export const Settings = () => {
          
             </Grid>
           </Box>
+          <Button variant="contained" color='error'>
+            Change Password
+          </Button>
         </CardContent>
         <Divider />
         <CardActions sx={{ justifyContent: 'flex-end' }}>
@@ -127,5 +119,6 @@ export const Settings = () => {
         </CardActions>
       </Card>
     </form>
-  );
+  )
+  
 };
