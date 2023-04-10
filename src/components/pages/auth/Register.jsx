@@ -4,9 +4,14 @@ import { Box, Button,Checkbox, Link, Stack, TextField, Typography, FormControl, 
 import axios from 'axios';
 import { API_URL } from '../../general/config';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+
 
 export const Register = () => {
   const navigate = useNavigate();
+
+ 
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -53,7 +58,9 @@ export const Register = () => {
 
     }),
     onSubmit: async (values, helpers) => {
-
+      //if there are empty fields
+      console.log('in submit')
+     
       try {
         
         await axios.post(`${API_URL}/api/auth/register`, {
@@ -118,7 +125,7 @@ export const Register = () => {
                 Already have an account?
                 &nbsp;
                 <Link
-                onClick={
+                onClick={()=>
                   navigate('/auth/login')
                 }
                   href="/auth/login"
@@ -245,16 +252,19 @@ export const Register = () => {
                   .
                 </Typography>
               </Box>
-              
+             
+            
               {
                 //disable buttons if the there are errors in the form
 
-                formik.errors.first_name || formik.errors.last_name || formik.errors.email || formik.errors.password || formik.errors.confirm_password || formik.errors.terms || formik.errors.user_type ? (
+                 formik.values.first_name === "" || formik.values.last_name === "" || formik.values.email === "" || formik.values.password === "" || formik.values.confirm_password === "" || formik.values.terms === false || formik.values.user_type === "" || formik.errors.first_name || formik.errors.last_name || formik.errors.email || formik.errors.password || formik.errors.confirm_password || formik.errors.terms || formik.errors.user_type ? (
                   <Button disabled  fullWidth size="large" sx={{ mt: 3 }} type="submit" variant="contained">
                     Continue
                   </Button>
                 ) : (
                   <Button
+                  onSubmit={formik.handleSubmit}
+                  onClick={formik.handleSubmit}
                 fullWidth
                 size="large"
                 sx={{ mt: 3 }}

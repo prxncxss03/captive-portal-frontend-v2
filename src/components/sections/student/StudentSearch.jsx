@@ -7,7 +7,7 @@ export const StudentSearch = ({onChange, value, onSearch}) => (
       onChange={(e)=> onChange(e)}
       value={value}
       fullWidth
-      placeholder="Search students by name"
+      placeholder={'Search by name'}
       startAdornment={(
         <InputAdornment position="start">
           <SvgIcon

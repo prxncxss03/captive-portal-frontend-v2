@@ -14,6 +14,7 @@ import {
 import axios from 'axios';
 import { API_URL } from '../../general/config';
 import {  useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 //pages
 
@@ -21,6 +22,7 @@ import {  useNavigate } from 'react-router-dom';
 export const Login = () => {
 
   const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       email: '',

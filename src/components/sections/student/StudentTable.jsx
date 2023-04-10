@@ -115,7 +115,7 @@ export const StudentTable = (props) => {
       <Table
         component="div"
         count={count}
-        page={page}
+      
       />
     </Card>
   );

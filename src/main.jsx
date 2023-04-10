@@ -15,13 +15,14 @@ import {createTypography} from './theme/typography';
 
 //pages
 import {Login} from './components/pages/auth/Login';
-import { Register } from './components/pages/auth/Register';
+import {Register} from './components/pages/auth/Register';
 import { NotFound } from './components/pages/placeholder/NotFound';
 import { AccountPending } from './components/pages/placeholder/AccountPending';
 import {Home} from './components/pages/admin/home';
-import { Students } from './components/pages/admin/students/Students';
+import { Students } from './components/pages/admin/Students';
 import { Dashboard } from './components/pages/admin/Dashboard';
 import {PrivateRoutes} from './components/utils/PrivateRoutes';
+import { PendingAccounts } from './components/pages/admin/PendingAccounts';
 
  
 export function createTheme() {
@@ -98,6 +99,13 @@ export function createTheme() {
             <Dashboard />
           </PrivateRoutes>
 
+        },
+        {
+          path: '/admin/pending-accounts',
+          element:
+          <PrivateRoutes>
+            <PendingAccounts />
+          </PrivateRoutes>
         }
       ]
     }

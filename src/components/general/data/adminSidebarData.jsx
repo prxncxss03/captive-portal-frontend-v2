@@ -4,6 +4,8 @@ import {
     FaRegChartBar,
 }from "react-icons/fa";
 
+import {MdPendingActions} from "react-icons/md";
+
 export const adminSidebarData = [
     {
         path:"/admin/dashboard",
@@ -16,8 +18,8 @@ export const adminSidebarData = [
         icon:<FaUserAlt/>
     },
     {
-        path:"/analytics",
-        name:"Analytics",
-        icon:<FaRegChartBar/>
+        path:"/admin/pending-accounts",
+        name:"Pending Accounts",
+        icon: <MdPendingActions/>
     }
 ]

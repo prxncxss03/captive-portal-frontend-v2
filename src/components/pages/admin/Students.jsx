@@ -1,21 +1,15 @@
-import { useCallback, useMemo, useState,useEffect } from 'react';
-import { Box, Button, Container, Stack, SvgIcon, Typography } from '@mui/material';
-import { StudentTable } from '../../../sections/student/studentTable';
-import { StudentSearch } from '../../../sections/student/StudentSearch';
-import { instance } from '../../../../helper/http';
-
-const now = new Date();
-
+import {  useState,useEffect } from 'react';
+import { Box, Container, Stack,  Typography } from '@mui/material';
+import { StudentTable } from '../../sections/student/studentTable';
+import { StudentSearch } from '../../sections/student/StudentSearch';
+import { instance } from '../../../helper/http';
 
 export const Students = () => {
   instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
   const [listOfStudents, setListOfStudents] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [isUpdated, setIsUpdated] = useState(false);
- 
 
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
   
   useEffect(() => {
     console.log("instance", instance)
@@ -92,7 +86,7 @@ export const Students = () => {
             <StudentTable
               count={listOfStudents.length}
               items={listOfStudents}
-              page={page}
+         
               onDelete={handleStudentDelete}
   
             />
