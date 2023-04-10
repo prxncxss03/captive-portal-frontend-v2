@@ -23,6 +23,7 @@ import { Students } from './components/pages/admin/Students';
 import { Dashboard } from './components/pages/admin/Dashboard';
 import {PrivateRoutes} from './components/utils/PrivateRoutes';
 import { PendingAccounts } from './components/pages/admin/PendingAccounts';
+import { Faculty } from './components/pages/admin/Faculty';
 
  
 export function createTheme() {
@@ -106,6 +107,14 @@ export function createTheme() {
           <PrivateRoutes>
             <PendingAccounts />
           </PrivateRoutes>
+        },
+        {
+          path: '/admin/faculty',
+          element:
+          <PrivateRoutes>
+            <Faculty />
+          </PrivateRoutes>
+
         }
       ]
     }

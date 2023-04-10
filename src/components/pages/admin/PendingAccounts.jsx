@@ -1,5 +1,7 @@
 import {  useState,useEffect } from 'react';
-import { Box, Container, Stack,  Typography } from '@mui/material';
+import { Box, Button, Container, Stack,  Typography } from '@mui/material';
+import {BsCheck2Circle} from 'react-icons/bs';
+import {TiDeleteOutline} from 'react-icons/ti';
 
 import { PendingAccountTable } from '../../sections/pendingAccounts/PendingAccountTable';
 import { StudentSearch } from '../../sections/student/StudentSearch';
@@ -21,6 +23,16 @@ export const PendingAccounts = () => {
     });
   }, [isUpdated]);
 
+  const handleApproveAll = async () => {
+    await instance.put('/api/admin/pending-accounts').then((response) => {
+        console.log(response.data.message);
+        setListOfPendingAccounts([]);
+        setIsUpdated(!isUpdated);
+        }).catch((error) => {
+        console.log(error);
+        });
+    }
+
   const handleApprovedAccount = async (e,userId) => {
     console.log(userId);
     await instance.put(`/api/admin/pending-accounts/${userId}`).then((response) => {
@@ -31,6 +43,17 @@ export const PendingAccounts = () => {
         console.log(error);
         });
     }
+
+  const handleRejectAll = async () => {
+    await instance.delete('/api/admin/pending-accounts').then((response) => {
+        console.log(response.data.message);
+        setListOfPendingAccounts([]);
+        setIsUpdated(!isUpdated);
+        }).catch((error) => {
+        console.log(error);
+        });
+    }
+
 
   const handleSearchPendingAccounts = () => {
     if (searchValue === '') {
@@ -47,6 +70,9 @@ export const PendingAccounts = () => {
       setListOfPendingAccounts(response.data.pending_accounts);
     }).catch((error) => {
       console.log(error);
+      if (error.response.status === 404) {
+        setListOfPendingAccounts([]);
+      }
     });
 
   }
@@ -80,13 +106,25 @@ export const PendingAccounts = () => {
               justifyContent="space-between"
               spacing={4}
             >
-              <Stack spacing={1}>
+
                 <Typography variant="h4">
                   Pending Accounts
                 </Typography>
-                
-              </Stack>
-        
+
+                <Stack direction="row" spacing={1}>
+
+
+                  <Button variant="contained" color="success" 
+                  onClick={handleApproveAll}>
+                      Approve All
+                      <BsCheck2Circle size={20} style={{marginLeft: '5px'}} />
+                  </Button>
+                  <Button variant="contained" color="error" 
+                  onClick={handleRejectAll}>
+                      Reject All
+                      <TiDeleteOutline size={20} style={{marginLeft: '5px'}} />
+                  </Button>
+                </Stack>
             </Stack>
             <StudentSearch onChange={(e)=> setSearchValue(e.target.value)} value={searchValue} 
               onSearch={handleSearchPendingAccounts}
@@ -94,7 +132,8 @@ export const PendingAccounts = () => {
             <PendingAccountTable
               count={listOfPendingAccounts.length}
               items={listOfPendingAccounts}
-                onApproved={handleApprovedAccount}
+              
+               onApproved={handleApprovedAccount}
               onDelete={handlePendingAccountDelete}
   
             />

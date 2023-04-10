@@ -21,6 +21,7 @@ import {
     const {
       count = 0,
       items = [],
+
       onApproved = () => {},
       onDelete = () => {},
     } = props;
@@ -39,6 +40,9 @@ import {
                   </TableCell>
                   <TableCell>
                     Email
+                  </TableCell>
+                  <TableCell>
+                    User Type
                   </TableCell>
                
                   <TableCell>
@@ -79,6 +83,9 @@ import {
                       </TableCell>
                       <TableCell>
                         {user.email}
+                      </TableCell>
+                      <TableCell>
+                        {user.user_type}
                       </TableCell>
                   
                       <TableCell>

@@ -4,9 +4,9 @@ import { StudentTable } from '../../sections/student/studentTable';
 import { StudentSearch } from '../../sections/student/StudentSearch';
 import { instance } from '../../../helper/http';
 
-export const Students = () => {
+export const Faculty = () => {
   instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
-  const [listOfStudents, setListOfStudents] = useState([]);
+  const [listofFaculty, setlistofFaculty] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [isUpdated, setIsUpdated] = useState(false);
 
@@ -14,44 +14,44 @@ export const Students = () => {
   useEffect(() => {
     console.log("instance", instance)
     
-    instance.get('/api/admin/students').then((response) => {
-      console.log(response.data.students);
-      setListOfStudents(response.data.students);
+    instance.get('/api/admin/faculty').then((response) => {
+      console.log(response.data.faculty);
+      setlistofFaculty(response.data.faculty);
     }).catch((error) => {
       console.log(error);
     });
   }, [isUpdated]);
 
 
-  const handleSearchStudent = () => {
+  const handleSearchFaculty = () => {
     if (searchValue === '') {
-      instance.get('/api/admin/students').then((response) => {
-        console.log(response.data.students);
-        setListOfStudents(response.data.students);
+      instance.get('/api/admin/faculty').then((response) => {
+        console.log(response.data.faculty);
+        setlistofFaculty(response.data.faculty);
       }).catch((error) => {
         console.log(error);
       });
       return;
     }
-    instance.get(`/api/admin/students/search/${searchValue}`).then((response) => {
-      console.log(response.data.students);
-      setListOfStudents(response.data.students);
+    instance.get(`/api/admin/faculty/search/${searchValue}`).then((response) => {
+      console.log(response.data.faculty);
+      setlistofFaculty(response.data.faculty);
     }).catch((error) => {
       console.log(error);
       if (error.response.status === 404) {
-        setListOfStudents([]);
+        setlistofFaculty([]);
       }
     });
 
   }
 
 
-  const handleStudentDelete = async (e,studentId) => {
+  const handleFacultyDelete = async (e,facultyId) => {
 
-    console.log(studentId);
-    await instance.delete(`/api/admin/students/${studentId}`).then((response) => {
+    console.log(facultyId);
+    await instance.delete(`/api/admin/faculty/${facultyId}`).then((response) => {
       console.log(response.data.message);
-      setListOfStudents(listOfStudents.filter((student) => student.id !== studentId));
+      setlistofFaculty(listofFaculty.filter((faculty) => faculty.id !== facultyId));
       setIsUpdated(!isUpdated);
     }).catch((error) => {
       console.log(error);
@@ -77,20 +77,20 @@ export const Students = () => {
             >
               <Stack spacing={1}>
                 <Typography variant="h4">
-                  Students
+                  Faculty
                 </Typography>
                 
               </Stack>
         
             </Stack>
             <StudentSearch onChange={(e)=> setSearchValue(e.target.value)} value={searchValue} 
-              onSearch={handleSearchStudent}
+              onSearch={handleSearchFaculty}
             />
             <StudentTable
-              count={listOfStudents.length}
-              items={listOfStudents}
+              count={listofFaculty.length}
+              items={listofFaculty}
          
-              onDelete={handleStudentDelete}
+              onDelete={handleFacultyDelete}
   
             />
           </Stack>
