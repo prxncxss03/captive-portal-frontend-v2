@@ -21,6 +21,7 @@ import { AccountPending } from './components/pages/placeholder/AccountPending';
 import {Home} from './components/pages/admin/home';
 import { Students } from './components/pages/admin/Students';
 import { Dashboard } from './components/pages/admin/Dashboard';
+import {PrivateRoutes} from './components/utils/PrivateRoutes';
 
  
 export function createTheme() {
@@ -51,9 +52,11 @@ export function createTheme() {
  
 
   const router = createBrowserRouter([
+
     {
       path: "/",
-      element: <App />,
+      element: 
+        <App />,
     },
     {
       path: "/auth/login",
@@ -71,18 +74,29 @@ export function createTheme() {
       path: '/account-pending',
       element: <AccountPending />,
     },
+    
     {
-      path: '/admin',
-      element: <Home />,
+      path: '/admin' ,
+      element: 
+      <PrivateRoutes>
+        <Home />
+        </PrivateRoutes>,
       children: [
     
         {
           path: '/admin/students',
-          element: <Students />,
+          element:
+          <PrivateRoutes>
+            <Students />
+          </PrivateRoutes>
+        
         },
         {
           path: '/admin/dashboard',
-          element: <Dashboard />,
+          element: 
+          <PrivateRoutes>
+            <Dashboard />
+          </PrivateRoutes>
 
         }
       ]
@@ -97,7 +111,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <RouterProvider router={router}>
-      <App />
+        <App />
       </RouterProvider>
     </ThemeProvider>
   </React.StrictMode>,

@@ -6,7 +6,7 @@ import { API_URL } from '../../general/config';
 import { useNavigate } from 'react-router-dom';
 
 export const Register = () => {
-
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -66,7 +66,7 @@ export const Register = () => {
 
         }).then((response) => {
           console.log(response.data);
-          useNavigate('/account-pending')
+          navigate('/account-pending')
         }).catch((error) => {
           console.log(error);
           helpers.setStatus({ success: false });
@@ -119,7 +119,7 @@ export const Register = () => {
                 &nbsp;
                 <Link
                 onClick={
-                  useNavigate('/auth/login')
+                  navigate('/auth/login')
                 }
                   href="/auth/login"
                   underline="hover"

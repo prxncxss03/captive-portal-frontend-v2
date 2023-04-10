@@ -1,12 +1,11 @@
 import { Box, Container,  Typography } from '@mui/material'
-import { Login } from './components/pages/auth/Login'
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
 
   return (
     <Container maxWidth="sm">
-
-      <Login />
+      <App />
     </Container>
     
   )
