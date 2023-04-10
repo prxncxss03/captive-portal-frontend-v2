@@ -51,8 +51,6 @@ export const Login = () => {
           console.log('token', localStorage.getItem('token'));
           localStorage.setItem('user', response.data.user)
           localStorage.setItem('isAuthenticated', true);
-
-
          
         }).catch((error) => {
           console.log(error);

@@ -7,18 +7,19 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import { createTypography } from './theme/typography';
 import {createPalette } from './theme/pallete';
 import { createShadows } from './theme/shadows';
 import {createComponents} from './theme/components';
-
+import {createTypography} from './theme/typography';
 
  
 export function createTheme() {
+  console.log('this is createTheme')
   const palette = createPalette();
   const components = createComponents({ palette });
   const shadows = createShadows();
   const typography = createTypography();
+  console.log(typography)
 
   return createATheme({
     breakpoints: {
@@ -48,9 +49,11 @@ export function createTheme() {
     },
   ]);
 
+const theme = createTheme();
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ThemeProvider theme={createTheme}>
+    <ThemeProvider theme={theme}>
       <RouterProvider router={router}>
       <App />
       </RouterProvider>
