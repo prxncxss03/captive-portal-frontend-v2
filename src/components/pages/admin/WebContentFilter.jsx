@@ -4,6 +4,7 @@ import { WebContentFilterTable } from '../../sections/webContentFilter/webConten
 import { StudentSearch } from '../../sections/student/StudentSearch';
 import { instance } from '../../../helper/http';
 import {IoMdAdd} from 'react-icons/io';
+import { AddWebContentModal } from '../../sections/webContentFilter/addWebContentModal';
 
 export const WebContentFilter = () => {
   instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
@@ -88,6 +89,8 @@ export const WebContentFilter = () => {
                       Add
                       <IoMdAdd size={20} style={{marginLeft: '5px'}} />
                   </Button>
+
+              <AddWebContentModal />
         
             </Stack>
             <StudentSearch onChange={(e)=> setSearchValue(e.target.value)} value={searchValue} 

@@ -1,5 +1,5 @@
 import { Box, Container,  Typography } from '@mui/material'
-import { Routes,Route } from 'react-router-dom'
+import { Routes,Route, Outlet } from 'react-router-dom'
 import { Login } from './components/pages/auth/Login';
 import { Register } from './components/pages/auth/Register';
 import { NotFound } from './components/pages/placeholder/NotFound';
@@ -19,7 +19,10 @@ function App() {
       <Routes >
           <Route path="/auth/login" element={<Login />} />
           
-          <Route element={<PrivateRoutes></PrivateRoutes>}>
+          <Route element={
+            <PrivateRoutes>
+            </PrivateRoutes>
+          }>
             <Route path="/" element={<Home />} />
             <Route path="/auth/register" element={<Register />} />
             <Route path="/account-pending" element={<AccountPending />} />
