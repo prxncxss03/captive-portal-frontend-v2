@@ -9,6 +9,7 @@ import { Students } from './components/pages/admin/Students';
 import { Dashboard } from './components/pages/admin/Dashboard';
 import { PrivateRoutes } from './components/utils/PrivateRoutes';
 import { PendingAccounts } from './components/pages/admin/PendingAccounts';
+import { WebContentFilter } from './components/pages/admin/WebContentFilter';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/admin/students" element={<Students />} />
             <Route path="/admin/dashboard" element={<Dashboard />} />
             <Route path="/admin/pending-accounts" element={<PendingAccounts />} />
+            <Route path="/admin/web-content-filter" element={<WebContentFilter />} />
           </Route>
           
           <Route path="*" element={<NotFound />} />

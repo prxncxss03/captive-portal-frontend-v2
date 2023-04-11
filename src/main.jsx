@@ -24,7 +24,7 @@ import { Dashboard } from './components/pages/admin/Dashboard';
 import { PendingAccounts } from './components/pages/admin/PendingAccounts';
 import { Faculty } from './components/pages/admin/Faculty';
 import { Settings } from './components/pages/Settings';
-
+import { WebContentFilter } from './components/pages/admin/WebContentFilter';
  
 export function createTheme() {
   const palette = createPalette();
@@ -102,18 +102,16 @@ export function createTheme() {
         },
         {
           path: '/admin/faculty',
-          element:
-         
-            <Faculty />
-    
-
+          element: <Faculty />
         },
         {
           path: '/admin/settings',
-          element:
-  
-            <Settings />
+          element: <Settings />
         
+        },
+        {
+          path: '/admin/web-content-filter',
+          element: <WebContentFilter />
         }
       ]
     }
