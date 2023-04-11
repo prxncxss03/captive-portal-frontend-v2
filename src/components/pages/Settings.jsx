@@ -18,7 +18,8 @@ import { sentenceCase } from '../../helper/sentenceCase';
 
 export const Settings = () => {
   instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
-  let user = JSON.parse(localStorage.getItem('user'));
+  let user = JSON.parse(localStorage.getItem('user') ? localStorage.getItem('user') : '');
+  
   console.log(user)
   const [values, setValues] = useState({
     firstName: user.first_name ? user.first_name : '',
