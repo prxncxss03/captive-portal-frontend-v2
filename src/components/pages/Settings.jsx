@@ -10,12 +10,14 @@ import {
   TextField,
   Unstable_Grid2 as Grid
 } from '@mui/material';
+import { instance } from '../../helper/http';
 
 
 export const Settings = () => {
+  instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
   let user = JSON.parse(localStorage.getItem('user'));
   console.log(user)
-
+  const [isShowEditPassword, setIsShowEditPassword] = useState(false)
   const [values, setValues] = useState({
     firstName: user.first_name ? user.first_name : '',
     lastName: user.last_name ? user.last_name : '',
@@ -23,22 +25,31 @@ export const Settings = () => {
 
   });
 
-  const handleChange = useCallback(
-    (event) => {
-      setValues((prevState) => ({
-        ...prevState,
-        [event.target.name]: event.target.value
-      }));
-    },
-    []
-  );
+  const handleChange = (event) => {
+    setValues({
+      ...values,
+      [event.target.name]: event.target.value
+    });
+  };
 
-  const handleSubmit = useCallback(
-    (event) => {
+  const handleSubmit = ((event) => {
       event.preventDefault();
-    },
-    []
-  );
+      console.log('values', values)
+      if (values.firstName === '' && values.lastName === '' && values.email === '') {
+        return
+      }
+      instance.put('/api/user/setting/update/' + user.id, {
+        first_name: values.firstName,
+        last_name: values.lastName,
+        email: values.email,
+      }).then((response)=> {
+        console.log("data", response.data)
+
+      }).catch((error)=> {
+        console.log(error)
+      })
+    })
+
 
   return(
     <form
@@ -107,14 +118,55 @@ export const Settings = () => {
          
             </Grid>
           </Box>
-          <Button variant="contained" color='error'>
-            Change Password
-          </Button>
+  
         </CardContent>
         <Divider />
         <CardActions sx={{ justifyContent: 'flex-end' }}>
-          <Button variant="contained">
+          <Button variant="contained" type="submit" onSubmit={handleSubmit}>
             Save details
+          </Button>
+        </CardActions>
+      </Card>
+
+      <Card>
+        <CardHeader
+          subheader="You can update your password here."
+          title="Password"
+        />
+        <Divider />
+        <CardContent>
+          <TextField
+            fullWidth
+            label="Current password"
+            margin="normal"
+            name="password"
+            type="password"
+            variant="outlined"
+          />
+          <TextField
+            fullWidth
+            label="New password"
+            margin="normal"
+            name="password"
+            type="password"
+            variant="outlined"
+          />
+          <TextField
+            fullWidth
+            label="Confirm password"
+            margin="normal"
+            name="password"
+            type="password"
+            variant="outlined"
+          />
+        </CardContent>
+        <Divider />
+        <CardActions sx={{ justifyContent: 'flex-end' }}>
+          <Button
+            color="primary"
+            variant="contained"
+          >
+            Update Password
           </Button>
         </CardActions>
       </Card>
