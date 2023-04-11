@@ -32,9 +32,8 @@ export const Settings = () => {
   });
 
   const [passwordValues, setPasswordValues] = useState({
-    currentPassword: '',
-    newPassword: '',
-    confirmPassword: ''
+    new_password: '',
+    confirm_password: '',
   });
 
   const formik = useFormik({
@@ -120,34 +119,23 @@ export const Settings = () => {
 
     }),
     onSubmit: async (values, helpers) => {
-      
-     
+      console.log('values', values)
       try {
-        
+        console.log('inside submit password')
         await instance.put('/api/user/setting/update-password/' + user.id, {
-          current_password: values.current_password,
           new_password: values.new_password,
           confirm_password: values.confirm_password,
-
         }).then((response) => {
           console.log(response.data);
-          setDefaultValues({
-            firstName: sentenceCase(values.first_name),
-            lastName: sentenceCase(values.last_name),
-            email: values.email,
-          })
           helpers.setStatus({ success: true });
-          localStorage.setItem('user', JSON.stringify(response.data));
-          
-          
+          helpers.setSubmitting(false);
         }).catch((error) => {
           console.log(error);
           helpers.setStatus({ success: false });
           helpers.setErrors({ submit: error.response.data.message});
           helpers.setSubmitting(false);
-        });
-
-      } catch (err) {
+        })
+      }catch (err) {
         helpers.setStatus({ success: false });
         helpers.setErrors({ submit: err.message });
         helpers.setSubmitting(false);
@@ -156,39 +144,12 @@ export const Settings = () => {
   });
 
 
-  const handleChangePassword = (event) => {
-    setPasswordValues({
-      ...passwordValues,
-      [event.target.name]: event.target.value
-    });
-  };
-
-
-  const handleResetPassword = () => {
-
-    console.log('reset password')
-    console.log(passwordValues)
-    instance.put('/api/user/setting/update-password/' + user.id, {
-      current_password: passwordValues.currentPassword,
-      new_password: passwordValues.newPassword,
-      confirm_password: passwordValues.confirmPassword
-    })
-    .then((response)=> {
-      console.log("data", response.data)
-    }).catch((error)=> {
-      console.log(error)
-    })
-
-  }
-
-
 
 
   return(
     <form
       autoComplete="off"
       noValidate
-      onSubmit={formik.handleSubmit}
     >
       <Card sx={{m: 4,mt: 5}}>
         <CardHeader
@@ -262,7 +223,7 @@ export const Settings = () => {
         <CardActions sx={{ justifyContent: 'flex-end' }}>
         {
           formik.values.first_name !== defaultValues.firstName || formik.values.last_name !== defaultValues.lastName || formik.values.email !== defaultValues.email || formik.errors.first_name || formik.errors.last_name || formik.errors.email || formik.values.first_name === '' || formik.values.last_name === '' || formik.values.email === '' ? (
-            <Button variant="contained" type="submit" >
+            <Button variant="contained" type="submit" onClick={formik.handleSubmit} >
               Save details
             </Button>
           ) : 
@@ -323,13 +284,21 @@ export const Settings = () => {
         </CardContent>
         <Divider />
         <CardActions sx={{ justifyContent: 'flex-end' }}>
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={handleResetPassword}
-          >
-            Update Password
-          </Button>
+        {
+          changePassword.values.new_password === '' || changePassword.values.confirm_password === '' ? (
+            <Button variant="contained" type="submit" disabled>
+              Update Password
+            </Button>
+          ) :
+          (
+            <Button variant="contained" type="submit" onClick={changePassword.handleSubmit}>
+              Update Password
+            </Button>
+          )
+
+
+        }
+          
         </CardActions>
       </Card>
     </form>
