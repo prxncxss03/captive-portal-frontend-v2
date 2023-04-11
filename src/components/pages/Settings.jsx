@@ -19,8 +19,6 @@ import { sentenceCase } from '../../helper/sentenceCase';
 export const Settings = () => {
   instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
   let user = JSON.parse(localStorage.getItem('user') ? localStorage.getItem('user') : '');
-  
-  console.log(user)
   const [values, setValues] = useState({
     firstName: user.first_name ? user.first_name : '',
     lastName: user.last_name ? user.last_name : '',
@@ -97,6 +95,66 @@ export const Settings = () => {
     }
   });
 
+  const changePassword = useFormik({
+    initialValues: {
+      current_password : '',
+      new_password : '',
+      confirm_password : '',
+    },
+    validationSchema: Yup.object({
+
+      new_password: Yup
+        .string()
+        .max(255)
+        .required('New password is required')
+        .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+          "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+        ),
+
+      confirm_password: Yup
+        .string()
+        .max(255)
+        .required('Password Confirmation is required')
+        .oneOf([Yup.ref('new_password'), null], 'Passwords must match'),
+
+    }),
+    onSubmit: async (values, helpers) => {
+      
+     
+      try {
+        
+        await instance.put('/api/user/setting/update-password/' + user.id, {
+          current_password: values.current_password,
+          new_password: values.new_password,
+          confirm_password: values.confirm_password,
+
+        }).then((response) => {
+          console.log(response.data);
+          setDefaultValues({
+            firstName: sentenceCase(values.first_name),
+            lastName: sentenceCase(values.last_name),
+            email: values.email,
+          })
+          helpers.setStatus({ success: true });
+          localStorage.setItem('user', JSON.stringify(response.data));
+          
+          
+        }).catch((error) => {
+          console.log(error);
+          helpers.setStatus({ success: false });
+          helpers.setErrors({ submit: error.response.data.message});
+          helpers.setSubmitting(false);
+        });
+
+      } catch (err) {
+        helpers.setStatus({ success: false });
+        helpers.setErrors({ submit: err.message });
+        helpers.setSubmitting(false);
+      }
+    }
+  });
+
 
   const handleChangePassword = (event) => {
     setPasswordValues({
@@ -132,13 +190,13 @@ export const Settings = () => {
       noValidate
       onSubmit={formik.handleSubmit}
     >
-      <Card>
+      <Card sx={{m: 4,mt: 5}}>
         <CardHeader
           subheader="The information can be edited"
           title="Profile"
         />
         <CardContent sx={{ pt: 0 }}>
-          <Box sx={{ m: -1.5 }}>
+          <Box sx={{ m: -1.5, }}>
             <Grid
               container
               spacing={3}
@@ -218,41 +276,50 @@ export const Settings = () => {
         </CardActions>
       </Card>
 
-      <Card>
+      <Card sx={{m: 4,mt: 2}}>
         <CardHeader
           subheader="You can update your password here."
           title="Password"
         />
         <Divider />
         <CardContent>
-          <TextField
-            fullWidth
-            label="Current password"
-            margin="normal"
-            name="currentPassword"
-            type="password"
-            variant="outlined"
-            onChange={handleChangePassword}
-            
-          />
-          <TextField
-            fullWidth
-            label="New password"
-            margin="normal"
-            name="newPassword"
-            type="password"
-            variant="outlined"
-            onChange={handleChangePassword}
-          />
-          <TextField
-            fullWidth
-            label="Confirm password"
-            margin="normal"
-            name="confirmPassword"
-            type="password"
-            variant="outlined"
-            onChange={handleChangePassword}
-          />
+          <Box sx={{ m: 1, display: 'flex',flexDirection: "column"}}>
+            <Grid
+              container
+              spacing={3}
+
+            >
+       
+                <TextField
+                      sx={{ mb: 1 }}
+                      error={!!(changePassword.touched.new_password && changePassword.errors.new_password)}
+                      fullWidth
+                      helperText={changePassword.touched.new_password && changePassword.errors.new_password}
+                      label="New Password"
+                      name="new_password"
+                      onBlur={changePassword.handleBlur}
+                      onChange={changePassword.handleChange}
+                      type="password"
+                      value={changePassword.values.new_password}
+                    />
+
+          
+              
+            <TextField
+                      error={!!(changePassword.touched.confirm_password && changePassword.errors.confirm_password)}
+                      fullWidth
+                      helperText={changePassword.touched.confirm_password && changePassword.errors.confirm_password}
+                      label="Confirm Password"
+                      name="confirm_password"
+                      onBlur={changePassword.handleBlur}
+                      onChange={changePassword.handleChange}
+                      type="password"
+                      value={changePassword.values.confirm_password}
+                    />
+        
+            </Grid>
+          </Box>
+
         </CardContent>
         <Divider />
         <CardActions sx={{ justifyContent: 'flex-end' }}>

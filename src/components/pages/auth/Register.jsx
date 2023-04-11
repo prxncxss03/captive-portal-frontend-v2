@@ -46,7 +46,11 @@ export const Register = () => {
       password: Yup
         .string()
         .max(255)
-        .required('Password is required'),
+        .required('Password is required')
+        .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+          "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+        ),
 
       confirm_password: Yup
         .string()
