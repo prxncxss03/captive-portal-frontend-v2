@@ -5,6 +5,7 @@ import axios from 'axios';
 import { API_URL } from '../../general/config';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { sentenceCase } from '../../../helper/sentenceCase';
 
 
 export const Register = () => {
@@ -65,8 +66,8 @@ export const Register = () => {
         
         await axios.post(`${API_URL}/api/auth/register`, {
           email: values.email,
-          first_name: values.first_name.charAt(0).toUpperCase() + values.first_name.slice(1),
-          last_name: values.last_name.charAt(0).toUpperCase() + values.last_name.slice(1),
+          first_name: sentenceCase(values.first_name),
+          last_name: sentenceCase(values.last_name),
           user_type: values.user_type,
           password: values.password,
           password_confirmation: values.confirm_password,
