@@ -41,7 +41,7 @@ export const Login = () => {
         .required('Password is required')
     }),
     onSubmit: async (values, helpers) => {
-      //update the session to true
+     
       console.log('inside submit', values);
       console.log('env', API_URL);
 
@@ -191,9 +191,14 @@ export const Login = () => {
                 severity="info"
                 sx={{ mt: 3 }}
               >
+              {
+                /*
                 <div>
                   You can use <b>admin@gmail.com</b> and password <b>Password123!</b>
                 </div>
+                */
+                
+              }
               </Alert>
             </form>
     
