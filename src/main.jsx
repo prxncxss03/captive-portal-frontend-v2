@@ -80,49 +80,41 @@ export function createTheme() {
     
     {
       path: '/admin' ,
-      element: 
-      <PrivateRoutes>
-        <Home />
-        </PrivateRoutes>,
+      element:<Home />
+     ,
       children: [
     
         {
           path: '/admin/students',
           element:
-          <PrivateRoutes>
             <Students />
-          </PrivateRoutes>
         
         },
         {
           path: '/admin/dashboard',
           element: 
-          <PrivateRoutes>
             <Dashboard />
-          </PrivateRoutes>
 
         },
         {
           path: '/admin/pending-accounts',
           element:
-          <PrivateRoutes>
             <PendingAccounts />
-          </PrivateRoutes>
         },
         {
           path: '/admin/faculty',
           element:
-          <PrivateRoutes>
+         
             <Faculty />
-          </PrivateRoutes>
+    
 
         },
         {
           path: '/admin/settings',
           element:
-          <PrivateRoutes>
+  
             <Settings />
-          </PrivateRoutes>
+        
         }
       ]
     }
