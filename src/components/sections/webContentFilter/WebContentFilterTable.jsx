@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   Card,
-  Stack,
   Table,
   TableBody,
   TableCell,
@@ -12,7 +11,6 @@ import {
   Typography
 } from '@mui/material';
 import { error } from '../../../theme/colors';
-import { LetterAvatar } from '../../general/LetterAvatar';
 
 export const WebContentFilterTable = (props) => {
 
@@ -67,7 +65,7 @@ export const WebContentFilterTable = (props) => {
                       {web.category}
                     </TableCell>
                     <TableCell>
-                      <Button variant="secondary" onClick={(e)=>onDelete(e,student.id)}>
+                      <Button variant="secondary" onClick={(e)=>onDelete(e,web.id)}>
                         <Typography variant="subtitle2" color={error.main}>
                           Remove
                         </Typography>

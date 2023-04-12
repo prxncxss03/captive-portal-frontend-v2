@@ -3,41 +3,45 @@ import { Box, Container, Stack,Button,  Typography } from '@mui/material';
 import { WebContentFilterTable } from '../../sections/webContentFilter/webContentFilterTable';
 import { StudentSearch } from '../../sections/student/StudentSearch';
 import { instance } from '../../../helper/http';
-import {IoMdAdd} from 'react-icons/io';
+import { sentenceCase } from '../../../helper/sentenceCase';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { AddWebContentModal } from '../../sections/webContentFilter/addWebContentModal';
 
 export const WebContentFilter = () => {
   instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
   const [listOfWebContent, setlistOfWebContent] = useState([]);
   const [searchValue, setSearchValue] = useState('');
-  const [isUpdated, setIsUpdated] = useState(false);
+  const [values, setValues] = useState({
+    name: '',
+    url: '',
+    category: ''
+  });
+  const [isUpdated, setIsUpdated] = useState(false  );
+  const [isOpen, setIsOpen] = useState(false);
 
   
   useEffect(() => {
-    console.log("instance", instance)
     
-    instance.get('/api/admin/students').then((response) => {
-      console.log(response.data.students);
-      setlistOfWebContent(response.data.students);
+    instance.get('/api/admin/web-content-filter').then((response) => {
+      setlistOfWebContent(response.data.webpages);
     }).catch((error) => {
       console.log(error);
     });
   }, [isUpdated]);
 
 
-  const handleSearchStudent = () => {
+  const handleSearchWebsite = () => {
     if (searchValue === '') {
-      instance.get('/api/admin/students').then((response) => {
-        console.log(response.data.students);
-        setlistOfWebContent(response.data.students);
+      instance.get('/api/admin/web-content-filter').then((response) => {
+        setlistOfWebContent(response.data.webpages);
       }).catch((error) => {
         console.log(error);
       });
       return;
     }
-    instance.get(`/api/admin/students/search/${searchValue}`).then((response) => {
-      console.log(response.data.students);
-      setlistOfWebContent(response.data.students);
+    instance.get(`/api/admin/web-content-filter/search/${searchValue}`).then((response) => {
+      setlistOfWebContent(response.data.blocked_websites);
     }).catch((error) => {
       console.log(error);
       if (error.response.status === 404) {
@@ -48,18 +52,48 @@ export const WebContentFilter = () => {
   }
 
 
-  const handleStudentDelete = async (e,studentId) => {
-
-    console.log(studentId);
-    await instance.delete(`/api/admin/students/${studentId}`).then((response) => {
+  const handleWebsiteDelete = async (e,webpage) => {
+    await instance.delete(`/api/admin/web-content-filter/${webpage}`).then((response) => {
       console.log(response.data.message);
-      setlistOfWebContent(listOfWebContent.filter((student) => student.id !== studentId));
+      setlistOfWebContent(listOfWebContent.filter((webpage) => webpage.id !== webpage));
       setIsUpdated(!isUpdated);
     }).catch((error) => {
       console.log(error);
-    });
+    });}
+  
 
-  }
+    const handleChange = (e) =>{
+      const { name, value } = e.target;
+      setValues({
+        ...values,
+        [name]: value
+      });
+    }
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      await instance.post('/api/admin/web-content-filter', values).then((response) => {
+        console.log(response.data.message);
+        setIsUpdated(!isUpdated);
+        setValues({
+          name: '',
+          url: '',
+          category: ''
+        });
+        setIsOpen(!isOpen);
+      }).catch((error) => {
+        console.log(error);
+      });
+
+      console.log(values);
+    }
+
+    const handleModalOpen = () => {
+      setIsOpen(!isOpen);
+    }
+      
+
+  
 
   return (
     <>
@@ -83,24 +117,29 @@ export const WebContentFilter = () => {
                 </Typography>
                 
               </Stack>
+           <AddWebContentModal
+                handleModalOpen={handleModalOpen} 
+                isOpen={isOpen}
+                valueName={values.name}
+                valueUrl={values.url}
+                valueCategory={values.category}
+                nameOnChange={(e)=>handleChange(e)}
+                urlOnChange={(e) => handleChange(e)}
+                categoryOnChange={(e) => handleChange(e)}
+                onSubmit={(e) => handleSubmit(e)}>
 
-              <Button variant="contained" color="success" 
-                 >
-                      Add
-                      <IoMdAdd size={20} style={{marginLeft: '5px'}} />
-                  </Button>
-
-              <AddWebContentModal />
+                </AddWebContentModal>
         
             </Stack>
             <StudentSearch onChange={(e)=> setSearchValue(e.target.value)} value={searchValue} 
-              onSearch={handleSearchStudent}
+              onSearch={handleSearchWebsite}
+              placeholder={"Search by name, url, category"}
             />
             <WebContentFilterTable
-              count={listOfWebContent.length}
+        
               items={listOfWebContent}
-         
-              onDelete={handleStudentDelete}
+
+              onDelete={handleWebsiteDelete}
   
             />
           </Stack>

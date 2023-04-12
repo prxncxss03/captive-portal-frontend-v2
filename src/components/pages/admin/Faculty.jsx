@@ -85,6 +85,7 @@ export const Faculty = () => {
             </Stack>
             <StudentSearch onChange={(e)=> setSearchValue(e.target.value)} value={searchValue} 
               onSearch={handleSearchFaculty}
+              placeholder={"Search by name"}
             />
             <StudentTable
               count={listofFaculty.length}

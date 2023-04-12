@@ -128,6 +128,7 @@ export const PendingAccounts = () => {
             </Stack>
             <StudentSearch onChange={(e)=> setSearchValue(e.target.value)} value={searchValue} 
               onSearch={handleSearchPendingAccounts}
+              placeholder="Search by name"
             />
             <PendingAccountTable
               count={listOfPendingAccounts.length}

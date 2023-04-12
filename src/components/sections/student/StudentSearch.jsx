@@ -1,13 +1,13 @@
 import {HiMagnifyingGlass as MagnifyingGlassIcon} from 'react-icons/hi2';
 import { Button, Card, InputAdornment, OutlinedInput, SvgIcon } from '@mui/material';
 
-export const StudentSearch = ({onChange, value, onSearch}) => (
+export const StudentSearch = ({onChange, value, onSearch,placeholder}) => (
   <Card sx={{ p: 2 }}>
     <OutlinedInput
       onChange={(e)=> onChange(e)}
       value={value}
       fullWidth
-      placeholder={'Search by name'}
+      placeholder={placeholder}
       startAdornment={(
         <InputAdornment position="start">
           <SvgIcon
