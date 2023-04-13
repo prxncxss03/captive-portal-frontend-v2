@@ -10,8 +10,11 @@ export const OverviewUser = ({
 
   
     return(
-        <Card >
-      <CardContent>
+      <Card sx={{
+        maxWidth: 350,
+        margin: 2,
+      }}>
+      <CardContent >
         <Stack
           alignItems="flex-start"
           direction="row"

@@ -1,51 +1,147 @@
 import React, { useState } from 'react';
 import { adminSidebarData } from '../../general/data/adminSidebarData';
-import { NavLink, Outlet} from 'react-router-dom';
+import { NavLink, Navigate, Outlet,useNavigate} from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { Box, Divider, IconButton, Stack, SvgIcon, Typography,Button } from '@mui/material';
 import { Logo } from '../../general/Logo';
 import {HiChevronUpDown} from "react-icons/hi2";
 import Tooltip from '@mui/material/Tooltip';
+import { BROWN } from '../../general/config';
+import { LetterAvatar } from '../../general/LetterAvatar';
+import { PopoverLogout } from '../../sections/header/PopoverLogout';
+import { instance } from '../../../helper/http';
 //import { Header } from '../../sections/header/Header';
 
 export const Home = () => {
+    instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+    const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem('user'));
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
-    const[isOpen ,setIsOpen] = useState(false);
-    const toggle = () => setIsOpen (!isOpen);
+   const toggleMenu = () => {
+        setIsOpenMenu(!isOpenMenu);
+    }
+    const[isOpenMenu ,setIsOpenMenu] = useState(false);
+    const[isOpenPopover ,setIsOpenPopover] = useState(false);
+
+
+    const handlePopoverClick = (event) => {
+        setAnchorEl(event.currentTarget);
+      };
+    
+      const handlePopoverClose = () => {
+        setAnchorEl(null);
+      };
+      
+    const handleLogout = () => {
+        console.log('inside logout')
+        instance.post('/api/auth/logout').then((response) => {
+            console.log(response.data.message);
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            navigate('/auth/login')
+        }).catch((error) => {
+            console.log(error);
+        });
+        
+    }
+    
+
     
     return (
         <Box sx={{
             display: 'flex',
             flexDirection: 'row',
             height: '100%',
-            width: '100%'
+            width: '100%',
+            
+            
         }}>
+        <Box sx={{
+            backgroundColor: 'pink',
+            position: 'absolute',
+            top: '0px' ,
+            right: 0,
+            zIndex: 49,
+            width: '100%',
+            height: '60px',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+        }}>
+
+        <Box 
+        sx={{
+            position: 'absolute',
+            top: '0px' ,
+            left: 0,
+            zIndex: 49,
+            width: '100%',
+            height: '100vh',
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            display: isOpenMenu ? 'block' : 'none',
+            transition: 'all 0.5s ease',
+            userSelect: 'none',
+            
+        }}>
+
+        </Box>
+            <Box sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginLeft: '20px',
+                marginTop: '10px',
+                
+            }}>
+                <Logo />
+                <Typography variant="h5" sx={{marginLeft: '10px', color: BROWN}}>Admin</Typography>
+            </Box>
+            <Box >
+                <PopoverLogout
+                handlePopoverClose={handlePopoverClose}
+                handlePopoverClick={handlePopoverClick}
+                firstName={user.first_name}
+                lastName={user.last_name}
+                anchorEl={anchorEl}
+                onLogout={handleLogout}
+                 />
+            </Box>
+            
+        </Box>
             
 
          
             <Box sx={{
                 backgroundColor: 'primary.dark',
                 color: 'primary.contrastText',
-                width: isOpen ? "330px" : "60px",
+                width: isOpenMenu ? "330px" : "60px",
                 height: "100vh",
                 position: 'fixed',
                 zIndex: 50,
-                padding: isOpen ? '0 0 0 4px' : '0 0 0 0',
+                padding: isOpenMenu ? '0 0 0 4px' : '0 0 0 0',
+                marginRight: isOpenMenu ? '330px' : '60px',
                 //add hover effect
             
                 '@media screen and (max-width: 653px)': {
-                    width: isOpen ? "250px" : "50px",
+                    width: isOpenMenu ? "250px" : "50px",
                     padding: '0',
                 }
 
             }}>
 
-                    <div className="top_section">
+                    
     
-                        <div style={{marginLeft: isOpen ? "20px" : "20px", marginTop: '25px'}} className="bars">
-                            <FaBars onClick={toggle} />
-                        </div>
-                    </div>
+                <Box sx={{marginLeft: isOpenMenu ? "20px" : "20px", marginTop: '25px', 
+                ":hover":{
+                    cursor: 'pointer',
+                    color: BROWN,
+                }
+                }} className="bars">
+                    <FaBars onClick={toggleMenu} />
+                </Box>
+            
             
                 <Box
                     sx={{
@@ -59,7 +155,7 @@ export const Home = () => {
                     }}
                     >
                     <Box sx={{ p: 3 ,
-                    display: isOpen ? "block" : "none",
+                    display: isOpenMenu ? "block" : "none",
                      
                      }}>
                   
@@ -109,7 +205,7 @@ export const Home = () => {
                         </SvgIcon>
                     </Box>
                     </Box>
-                    <Divider sx={{ borderColor: 'neutral.700', display: isOpen ? 'block' : 'none' }} />
+                    <Divider sx={{ borderColor: 'neutral.700', display: isOpenMenu ? 'block' : 'none' }} />
                     <Box
                     component="nav"
                     sx={{
@@ -130,26 +226,26 @@ export const Home = () => {
                             {
                     adminSidebarData.map((item, index)=>(
                         
-                        <NavLink to={item.path}  key={index} onClick={toggle}   className="link" style={{
+                        <NavLink to={item.path}  key={index}   className="link" style={{
                             textDecoration: "none",
                             //add hover effect
 
                         }}>
                         <Tooltip title={item.name} placement="right" arrow>
-                            <Stack direction="row" alignItems='center' spacing={2} sx={{ p: isOpen ? 2 : 0,
+                            <Stack direction="row" alignItems='center' spacing={2} sx={{ p: isOpenMenu ? 2 : 0,
                             ":hover": {
-                                backgroundColor: isOpen ? 'rgba(255, 255, 255, 0.04)' : 'transparent',
+                                backgroundColor: isOpenMenu ? 'rgba(255, 255, 255, 0.04)' : 'transparent',
                                 borderRadius: 1,
                                 
                                 
                             },                       
-                            marginBottom: isOpen ? 0 : 4  }}>
+                            marginBottom: isOpenMenu ? 0 : 4  }}>
                                 <SvgIcon fontSize="small" sx={{ color: 'primary.lightest', mt: 0.5,
-                                fontSize: isOpen ? "20px" : "25px",
+                                fontSize: isOpenMenu ? "20px" : "25px",
                                 transition: "all 0.34s ease",
                                 ":hover": {
 
-                                    color: '#dcab5e',
+                                    color: BROWN,
 
                                 }
                                 }}>
@@ -157,11 +253,11 @@ export const Home = () => {
                                 </SvgIcon>
 
                                     <Box sx={{
-                                        display: isOpen ? "block" : "none" 
+                                        display: isOpenMenu ? "block" : "none" 
                                     }}>
                                         <Typography
                                         sx={{
-                                            display: isOpen ? "block" : "none"
+                                            display: isOpenMenu ? "block" : "none"
                                         }}
                                             color="primary.contrastText"
 
@@ -192,7 +288,7 @@ export const Home = () => {
                 p: 3
             }}>
       
-                <Outlet/>
+                <Outlet context={isOpenMenu}/>
             </Box>
           
         </Box>

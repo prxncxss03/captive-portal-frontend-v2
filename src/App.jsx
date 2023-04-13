@@ -12,15 +12,18 @@ import { Dashboard } from './components/pages/admin/Dashboard';
 import { PrivateRoutes } from './components/utils/PrivateRoutes';
 import { PendingAccounts } from './components/pages/admin/PendingAccounts';
 import { WebContentFilter } from './components/pages/admin/WebContentFilter';
+import { useOutletContext } from 'react-router-dom';
 
 
 function App() {
+ 
   
   return (
     <Container sx={{
       height: '100vh',
       display: 'flex',
       overflow: 'hidden',
+
 
     }}>
    

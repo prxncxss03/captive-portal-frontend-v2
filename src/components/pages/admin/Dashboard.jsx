@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { MdOutlineSchool } from "react-icons/md"
+import { Box } from "@mui/material";
 import {
     FaUserAlt,
     FaChalkboardTeacher,
@@ -8,8 +8,11 @@ import {
 import {MdPendingActions,MdFilterAlt} from "react-icons/md";
 import { OverviewUser } from "../../sections/overview/OverviewUser"
 import { instance } from "../../../helper/http"
+import { useOutletContext } from "react-router-dom";
+
 
 export const Dashboard = () => {  
+
     instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;  
     const [data, setData] = useState({
         totalStudents: 0,
@@ -37,10 +40,13 @@ export const Dashboard = () => {
 
     
     return(
-        <div style={{
-            width: "100%",
-            height: "100vh",
-            backgroundColor: "yellow"
+        <Box style={{
+            display: "flex",
+            maxWidth: "100%",
+            height: "100%",
+            alignItems: "center",
+            margin: 60,
+         
         }}>
             <OverviewUser 
                 title="Total Students"
@@ -65,6 +71,6 @@ export const Dashboard = () => {
                 value={data.totalStudents}
                 icon={<MdFilterAlt />}
             />
-        </div>
+        </Box>
     )
 }
