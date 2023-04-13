@@ -9,12 +9,12 @@ import { BsChatDots } from "react-icons/bs";
 
 export const studentSidebarData = [
     {
-        path:"/admin/dashboard",
+        path:"/student/dashboard",
         name:"Dashboard",
         icon: <RiDashboardFill size={21}/>
     },
     {
-        path:"/admin/settings",
+        path:"/student/settings",
         name:"Settings",
         icon: <RiSettings4Fill size={22}/>
     },

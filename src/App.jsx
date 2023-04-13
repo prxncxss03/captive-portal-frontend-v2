@@ -24,7 +24,7 @@ import { StudentDashboard } from './components/pages/student/StudentDashboard';
 function App() {
  
   return (
-    <SideBarContext.Provider value={{isOpenMenu, setIsOpenMenu}}>
+
 
     <Container sx={{
       height: '100vh',
@@ -39,7 +39,8 @@ function App() {
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/register" element={<Register />} />
 
-          <Route path="/" element={<PrivateRoutes></PrivateRoutes>}>
+          <Route element={<PrivateRoutes></PrivateRoutes>}>
+       
               <Route path='/admin' element={<Home />} />
               <Route path="/admin/dashboard" index element={<Dashboard />}  />
               <Route path="/auth/register" element={<Register />} />
@@ -59,10 +60,14 @@ function App() {
           
           <Route path="*" element={<NotFound />} />
         </Routes>
-           
+        <Route path="/admin/*" element={<Outlet />} />
+        <Route path="/student/*" element={<Outlet />}>
+  
+        </Route> 
+        <Route path="/auth/*" element={<Outlet />} />
 
     </Container>
-    </SideBarContext.Provider>
+
     
   )
 }

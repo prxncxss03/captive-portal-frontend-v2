@@ -8,7 +8,6 @@ import {HiChevronUpDown} from "react-icons/hi2";
 import Tooltip from '@mui/material/Tooltip';
 import { BROWN } from '../../general/config';
 import { LetterAvatar } from '../../general/LetterAvatar';
-import { PopoverLogout } from '../../sections/header/PopoverLogout';
 import { instance } from '../../../helper/http';
 //import { Header } from '../../sections/header/Header';
 
@@ -22,21 +21,14 @@ export const StudentHome = () => {
         setIsOpenMenu(!isOpenMenu);
     }
     const[isOpenMenu ,setIsOpenMenu] = useState(false);
+    const [isShowLogout ,setIsShowLogout] = useState(false);
 
+    const handleShowLogout = () => {
+        setIsShowLogout(!isShowLogout);
 
-    const handlePopoverClick = (event) => {
-        setAnchorEl(event.currentTarget);
-        if (event.currentTarget.tagName === "BUTTON") {
-          handleLogout();
-        } 
-      };
-    
-      const handlePopoverClose = () => {
-        setAnchorEl(null);
-      };
-      
+    }
+
     const handleLogout = () => {
-        console.log('inside logout')
         instance.post('/api/auth/logout').then((response) => {
             console.log(response.data.message);
             localStorage.removeItem('token');
@@ -100,15 +92,37 @@ export const StudentHome = () => {
                 <Logo />
                 <Typography variant="h5" sx={{marginLeft: '10px', color: BROWN}}>Student</Typography>
             </Box>
-            <Box >
-                <PopoverLogout
-                handlePopoverClose={handlePopoverClose}
-                handlePopoverClick={handlePopoverClick}
-                firstName={user.first_name}
-                lastName={user.last_name}
-                anchorEl={anchorEl}
-                onLogout={handleLogout}
-                 />
+            <Box sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                marginRight: '20px',
+            }}>
+                <Box onClick={handleShowLogout}>
+                    <LetterAvatar name={user.first_name + " " + user.last_name} />
+                </Box>
+                <Button 
+                
+                variant='contained' 
+                onClick={handleLogout}
+                sx={{
+                    backgroundColor: '#FFF',
+                    color: 'primary.main',
+                    position: 'absolute',
+                    top: '50px',
+                    right: '5px',
+                    zIndex: 49,
+                    display: isShowLogout ? 'block' : 'none',
+
+                    ':hover': {
+                        backgroundColor: BROWN,
+                        color: '#FFF',
+                    }
+                    
+
+                }}>
+                    Logout
+                </Button>
             </Box>
             
         </Box>
@@ -290,7 +304,7 @@ export const StudentHome = () => {
                 p: 3
             }}>
       
-                <Outlet context={isOpenMenu}/>
+                <Outlet/>
             </Box>
           
         </Box>

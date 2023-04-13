@@ -7,7 +7,6 @@ import { Logo } from '../../general/Logo';
 import {HiChevronUpDown} from "react-icons/hi2";
 import Tooltip from '@mui/material/Tooltip';
 import { BROWN } from '../../general/config';
-import { PopoverLogout } from '../../sections/header/PopoverLogout';
 import { instance } from '../../../helper/http';
 //import { Header } from '../../sections/header/Header';
 import {  createContext, useContext } from "react";
@@ -19,6 +18,7 @@ export const Home = () => {
 
     const user = JSON.parse(localStorage.getItem('user'));
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [isLogout, setIsLogout] = useState(false);
 
    const toggleMenu = () => {
         setIsOpenMenu(!isOpenMenu);
@@ -26,30 +26,25 @@ export const Home = () => {
     }
     const[isOpenMenu ,setIsOpenMenu] = useState(false);
 
-   
-    const handlePopoverClick = (event) => {
-        console.log("target",event.currentTarget.tagName);
-        console.log('event.currentTarget',event.currentTarget);
-        setAnchorEl(event.currentTarget);
-        if (event.currentTarget.tagName === "BUTTON") {
-          handleLogout();
-        } 
-      };
-    
-      const handlePopoverClose = () => {
-        setAnchorEl(null);
-      };
+     
+      const [isShowLogout ,setIsShowLogout] = useState(false);
+
+      const handleShowLogout = () => {
+          setIsShowLogout(!isShowLogout);
+  
+      }
+  
+      const handleLogout = () => {
+          instance.post('/api/auth/logout').then((response) => {
+              console.log(response.data.message);
+              localStorage.removeItem('token');
+              localStorage.removeItem('user');
+              navigate('/auth/login')
+          }).catch((error) => {
+              console.log(error);
+          });
+          
       
-    const handleLogout = () => {
-        console.log('inside logout')
-        instance.post('/api/auth/logout').then((response) => {
-            console.log(response.data.message);
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
-            navigate('/auth/login')
-        }).catch((error) => {
-            console.log(error);
-        });
         
     }
     
@@ -111,15 +106,37 @@ export const Home = () => {
                 <Logo />
                 <Typography variant="h5" sx={{marginLeft: '10px', color: BROWN}}>Admin</Typography>
             </Box>
-            <Box >
-                <PopoverLogout
-                handlePopoverClose={handlePopoverClose}
-                handlePopoverClick={handlePopoverClick}
-                firstName={user.first_name}
-                lastName={user.last_name}
-                anchorEl={anchorEl}
-                onLogout={handleLogout}
-                 />
+            <Box sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                marginRight: '20px',
+            }}>
+                <Box onClick={handleShowLogout}>
+                    <LetterAvatar name={user.first_name + " " + user.last_name} />
+                </Box>
+                <Button 
+                
+                variant='contained' 
+                onClick={handleLogout}
+                sx={{
+                    backgroundColor: '#FFF',
+                    color: 'primary.main',
+                    position: 'absolute',
+                    top: '50px',
+                    right: '5px',
+                    zIndex: 49,
+                    display: isShowLogout ? 'block' : 'none',
+
+                    ':hover': {
+                        backgroundColor: BROWN,
+                        color: '#FFF',
+                    }
+                    
+
+                }}>
+                    Logout
+                </Button>
             </Box>
             
         </Box>
