@@ -1,8 +1,7 @@
 import {  useState,useEffect } from 'react';
 import { Box, Container, Stack,  Typography } from '@mui/material';
-import { AnnouncementTable } from '../sections/announcement/AnnouncementTable';
-
-import { announcementStaticData } from '../general/data/announmentStaticData';
+import { AnnouncementTable } from './../sections/announcement/AnnouncementTable';
+import {announcementStaticData} from './../general/data/announmentStaticData';
 
 export const Announcement = () => {
   //instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { adminSidebarData } from '../../general/data/adminSidebarData';
+import { adminSidebarData } from './../../general/data/adminSidebarData';
 import { NavLink, Navigate, Outlet,useNavigate} from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { Box, Divider, IconButton, Stack, SvgIcon, Typography,Button } from '@mui/material';
-import { Logo } from '../../general/Logo';
+import { Logo } from './../../general/Logo';
 import {HiChevronUpDown} from "react-icons/hi2";
 import Tooltip from '@mui/material/Tooltip';
-import { BROWN } from '../../general/config';
-import { instance } from '../../../helper/http';
-import { LetterAvatar } from '../../general/LetterAvatar';
+import { BROWN } from './../../general/config';
+import { instance } from './../../../helper/http';
+import { LetterAvatar } from './../../general/LetterAvatar';
 
 
 export const Home = () => {

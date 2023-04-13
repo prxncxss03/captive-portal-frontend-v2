@@ -10,7 +10,7 @@ import {
   TableRow,
   Typography
 } from '@mui/material';
-import { error } from '../../../theme/colors';
+import { error } from './../../../theme/colors';
 
 export const WebContentFilterTable = (props) => {
 

@@ -2,7 +2,7 @@ import {  useState,useEffect } from 'react';
 import { Box, Container, Stack,  Typography } from '@mui/material';
 import { StudentTable } from './../../sections/student/studentTable';
 import { StudentSearch } from './../../sections/student/StudentSearch';
-import { instance } from '../../../helper/http';
+import { instance } from './../../../helper/http';
 
 export const Faculty = () => {
   instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
