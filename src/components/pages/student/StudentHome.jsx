@@ -66,6 +66,8 @@ export const StudentHome = () => {
         }}>
 
         <Box 
+
+        onClick={toggleMenu}
         sx={{
             position: 'absolute',
             top: '0px' ,
@@ -74,10 +76,14 @@ export const StudentHome = () => {
             width: '100%',
             height: '100vh',
             backgroundColor: 'rgba(0,0,0,0.5)',
-            display: isOpenMenu ? 'block' : 'none',
+            display: 'none',
             transition: 'all 0.5s ease',
             userSelect: 'none',
             
+            //show on mobile size
+            '@media (max-width: 600px)': {
+                display: isOpenMenu ? 'block' : 'none',
+            },
         }}>
 
         </Box>
@@ -298,13 +304,20 @@ export const StudentHome = () => {
 
 
 
-            <Box sx={{
+            <Box 
+              
+            sx={{
                 width: '100%',
                 height: '100%',
-                p: 3
+                p: 3,
+                margin: isOpenMenu ? '0 0 0 330px' : '0 0 0 60px',
+
+                '@media screen and (max-width: 500px)': {
+                    display: isOpenMenu ? 'none' : 'block',
+                }
             }}>
       
-                <Outlet/>
+                <Outlet context={isOpenMenu}/>
             </Box>
           
         </Box>

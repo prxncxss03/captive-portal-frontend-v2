@@ -8,8 +8,7 @@ import {HiChevronUpDown} from "react-icons/hi2";
 import Tooltip from '@mui/material/Tooltip';
 import { BROWN } from '../../general/config';
 import { instance } from '../../../helper/http';
-//import { Header } from '../../sections/header/Header';
-import {  createContext, useContext } from "react";
+import { LetterAvatar } from '../../general/LetterAvatar';
 
 
 export const Home = () => {
@@ -60,7 +59,8 @@ export const Home = () => {
             
         }}>
         <Box sx={{
-            backgroundColor: 'pink',
+            backdropFilter: "blur(3px)",
+            backgroundColor:'#fff',
             position: 'absolute',
             top: '0px' ,
             right: 0,
@@ -83,7 +83,8 @@ export const Home = () => {
             zIndex: 49,
             width: '100%',
             height: '100vh',
-            backgroundColor: 'rgba(0,0,0,0.5)',
+            backdropFilter: "blur(3px)",
+            backgroundColor: 'rgba(0, 0, 0, 0.2)',
             display: 'none',
             transition: 'all 0.5s ease',
             userSelect: 'none',
@@ -174,7 +175,7 @@ export const Home = () => {
             
             
                 <Box
-                    onBackdropClick={toggleMenu}
+                   
                     sx={{
                     
                     flexDirection: 'column',
@@ -323,8 +324,18 @@ export const Home = () => {
                 margin: isOpenMenu ? '0 0 0 330px' : '0 0 0 60px',
 
                 '@media screen and (max-width: 500px)': {
-                    display: isOpenMenu ? 'none' : 'block',
+                    display: isOpenMenu ? 'none' : 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                },    
+                '@media screen and (max-width: 453px)': {
+                    margin: isOpenMenu ? '0 0 0 330px' : '0 0 0 50px',
+                    padding: '40px 0 0 0',
+                    width: '400px',
                 }
+
+                
             }}>
       
                 <Outlet context={isOpenMenu}/>

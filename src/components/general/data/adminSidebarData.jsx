@@ -40,9 +40,5 @@ export const adminSidebarData = [
         name:"Settings",
         icon: <RiSettings4Fill size={22}/>
     },
-    {
-        path:"/admin/chat",
-        name:"Chat",
-        icon: <BsChatDots size={22}/>
-    }
+  
 ]

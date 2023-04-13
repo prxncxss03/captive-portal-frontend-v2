@@ -46,6 +46,13 @@ export const Dashboard = () => {
             height: "100%",
             alignItems: "center",
             margin: 60,
+            flexWrap: "wrap",
+
+            //media query
+            "@media (max-width: 600px)": {
+                margin: 0,
+                padding: 0,
+            }
          
         }}>
             <OverviewUser 

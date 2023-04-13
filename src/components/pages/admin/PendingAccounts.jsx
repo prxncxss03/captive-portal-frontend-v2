@@ -95,8 +95,35 @@ export const PendingAccounts = () => {
       <Box
         component="main"
         sx={{
-          flexGrow: 1,
-          py: 8
+          py: 8,
+          height: '100vh',
+
+          //media query
+          '@media (max-width: 600px)': {
+            py: 5,
+            marginLeft: -5,
+            px: 0,
+
+          },
+          '@media (max-width: 500px)': {
+            py: 5,
+            marginLeft: 45,
+            px: 0,
+
+          },
+          '@media (max-width: 422px)': {
+            py: 5,
+            marginLeft: 60,
+            px: 0,
+
+          },
+          '@media (max-width: 418px)': {
+            py: 5,
+            marginLeft: 52,
+            px: 0,
+
+          },
+
         }}
       >
         <Container maxWidth="xl">
@@ -105,9 +132,13 @@ export const PendingAccounts = () => {
               direction="row"
               justifyContent="space-between"
               spacing={4}
+              alignItems={{ xs: 'center', sm: 'center' }}
+              flexWrap={'wrap'}
             >
 
-                <Typography variant="h4">
+                <Typography variant="h4" sx={{
+                  fontSize: '1.5rem',
+                }}>
                   Pending Accounts
                 </Typography>
 
@@ -142,7 +173,8 @@ export const PendingAccounts = () => {
         </Container>
       </Box>
     </>
-  );
-};
 
+  );
+
+        }
 

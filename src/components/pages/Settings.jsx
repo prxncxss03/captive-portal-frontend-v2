@@ -151,16 +151,41 @@ export const Settings = () => {
       autoComplete="off"
       noValidate
     >
-      <Card sx={{m: 4,mt: 5}}>
+      <Card sx={{m: 4,mt: 5,
+        maxWidth: 1000,
+        overflowY: 'auto',
+
+        //media query
+        '@media (max-width: 600px)': {
+          padding: 0,
+          margin: '-8px',
+        },
+      }}>
         <CardHeader
           subheader="The information can be edited"
           title="Profile"
         />
-        <CardContent sx={{ pt: 0 }}>
+        <CardContent sx={{ 
+          //media query
+          '@media (max-width: 600px)': {
+            pb: 0,
+            pt: 0,
+
+          },
+        }}>
           <Box sx={{ m: -1.5, }}>
             <Grid
               container
-              spacing={3}
+              spacing={2}
+
+              sx={{
+                //media query
+                '@media (max-width: 600px)': {
+                  padding: 0,
+                  margin: 0,
+                  spacing: 0,
+                },
+              }}
             >
               <Grid
                 xs={12}
@@ -220,7 +245,7 @@ export const Settings = () => {
   
         </CardContent>
         <Divider />
-        <CardActions sx={{ justifyContent: 'flex-end' }}>
+        <CardActions sx={{ justifyContent: 'flex-end', marginRight: 1 }}>
         {
           formik.values.first_name !== defaultValues.firstName || formik.values.last_name !== defaultValues.lastName || formik.values.email !== defaultValues.email || formik.errors.first_name || formik.errors.last_name || formik.errors.email || formik.values.first_name === '' || formik.values.last_name === '' || formik.values.email === '' ? (
             <Button variant="contained" type="submit" onClick={formik.handleSubmit} >
@@ -237,17 +262,39 @@ export const Settings = () => {
         </CardActions>
       </Card>
 
-      <Card sx={{m: 4,mt: 2}}>
+      <Card sx={{m: 4,mt: 5,
+        maxWidth: 1000,
+
+        //media query
+        '@media (max-width: 600px)': {
+          padding: 0,
+          margin: 0,
+        },
+      }}>
         <CardHeader
           subheader="You can update your password here."
           title="Password"
         />
         <Divider />
-        <CardContent>
+        <CardContent sx={{ 
+          //media query
+          '@media (max-width: 600px)': {
+            paddingBottom: 0,
+            paddingTop: 0,
+          },
+        }}>
           <Box sx={{ m: 1, display: 'flex',flexDirection: "column"}}>
             <Grid
               container
               spacing={3}
+                sx={{
+                //media query
+                '@media (max-width: 600px)': {
+                  padding: 0,
+                  margin: 0,
+                  spacing: 0,
+                },
+              }}
 
             >
        

@@ -14,6 +14,12 @@ export const OverviewUser = ({
         maxWidth: 350,
         margin: 2,
         userSelect: 'none',
+
+        '@media (max-width: 400px)': {
+              margin: '0 -15px 15px -10px',
+              padding: 0,
+            }
+        
       }}>
       <CardContent >
         <Stack
@@ -21,8 +27,32 @@ export const OverviewUser = ({
           direction="row"
           justifyContent="space-between"
           spacing={3}
+          sx={{
+            '@media (max-width: 600px)': {
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '100%',
+              margin: '0 0 0 0',
+              padding: 0,
+            }
+
+          }}
         >
-          <Stack spacing={1}>
+          <Stack spacing={1}
+          sx={{
+            '@media (max-width: 600px)': {
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '100%',
+              margin: '0 -5 0 0',
+              padding: 0,
+            }
+
+          }}>
             <Typography
               color="text.secondary"
               variant="overline"
@@ -37,10 +67,19 @@ export const OverviewUser = ({
             sx={{
               backgroundColor: 'primary.main',
               height: 56,
-              width: 56
+              width: 56,
+              '@media (max-width: 600px)': {
+                display: 'none',
+              },
             }}
           >
-            <SvgIcon>
+            <SvgIcon sx={{
+              //media query
+              '@media (max-width: 400px)': {
+                display: 'none',
+              },
+      
+            }}>
                 {icon}
             </SvgIcon>
           </Avatar>

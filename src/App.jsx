@@ -39,7 +39,7 @@ function App() {
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/register" element={<Register />} />
 
-          <Route element={<PrivateRoutes></PrivateRoutes>}>
+          <Route path="/"  element={<PrivateRoutes></PrivateRoutes>}>
        
               <Route path='/admin' element={<Home />} />
               <Route path="/admin/dashboard" index element={<Dashboard />}  />
@@ -60,11 +60,8 @@ function App() {
           
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <Route path="/admin/*" element={<Outlet />} />
-        <Route path="/student/*" element={<Outlet />}>
-  
-        </Route> 
-        <Route path="/auth/*" element={<Outlet />} />
+       
+      
 
     </Container>
 
