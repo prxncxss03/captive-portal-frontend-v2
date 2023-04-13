@@ -17,10 +17,10 @@ import { WebContentFilter } from './components/pages/admin/WebContentFilter';
 function App() {
   
   return (
-    <Container maxWidth="sm" sx={{
-      width: '100%',
-      height: '100%',
-      backgroundColor: '#00ffff',
+    <Container sx={{
+      height: '100vh',
+      display: 'flex',
+      overflow: 'hidden',
 
     }}>
    

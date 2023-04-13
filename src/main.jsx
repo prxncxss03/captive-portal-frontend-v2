@@ -52,6 +52,17 @@ export function createTheme() {
   });
 }
  
+const styles = (theme) => ({
+  root: {
+    backgroundColor: 'blue',
+    // Match [md, ∞)
+    //       [900px, ∞)
+    [theme.breakpoints.up('md')]: {
+      backgroundColor: 'red',
+    },
+  },
+});
+
 
   const router = createBrowserRouter([
 

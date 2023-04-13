@@ -77,10 +77,12 @@ export const Login = () => {
     <>
     <Box
       sx={{
-        backgroundColor: 'background.paper',
+        
+        backgroundColor: 'violet',
         flex: '1 1 auto',
         alignItems: 'center',
         display: 'flex',
+        width: '100%',
         justifyContent: 'center'
       }}
     >

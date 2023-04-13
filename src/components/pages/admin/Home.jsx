@@ -5,7 +5,8 @@ import { FaBars } from 'react-icons/fa';
 import { Box, Divider, IconButton, Stack, SvgIcon, Typography,Button } from '@mui/material';
 import { Logo } from '../../general/Logo';
 import {HiChevronUpDown} from "react-icons/hi2";
-import { Dashboard } from './Dashboard';
+import Tooltip from '@mui/material/Tooltip';
+//import { Header } from '../../sections/header/Header';
 
 export const Home = () => {
 
@@ -14,46 +15,54 @@ export const Home = () => {
     
     return (
         <Box sx={{
-            backgroundColor: '#ffc0cb',
             display: 'flex',
             flexDirection: 'row',
             height: '100%',
             width: '100%'
         }}>
+            
+
          
             <Box sx={{
                 backgroundColor: 'primary.dark',
                 color: 'primary.contrastText',
-                width: isOpen ? "200px" : "50px",
+                width: isOpen ? "330px" : "60px",
                 height: "100vh",
+                position: 'fixed',
+                zIndex: 50,
+                padding: isOpen ? '0 0 0 4px' : '0 0 0 0',
+                //add hover effect
+            
+                '@media screen and (max-width: 653px)': {
+                    width: isOpen ? "250px" : "50px",
+                    padding: '0',
+                }
 
             }}>
 
                     <div className="top_section">
     
-                        <div style={{marginLeft: isOpen ? "50px" : "0px"}} className="bars">
-                        <FaBars onClick={toggle}/>
+                        <div style={{marginLeft: isOpen ? "20px" : "20px", marginTop: '25px'}} className="bars">
+                            <FaBars onClick={toggle} />
                         </div>
                     </div>
             
                 <Box
                     sx={{
-                    display: 'flex',
+                    
                     flexDirection: 'column',
-                    height: '100%'
+                    height: '100%',
+                        
+                    '@media screen and (max-width: 768px)': {
+                 
+                }
                     }}
                     >
-                    <Box sx={{ p: 3 }}>
-                    <Box
-                        href="/"
-                        sx={{
-                        display: 'inline-flex',
-                        height: 32,
-                        width: 32
-                        }}
-                    >
-                        <Logo />
-                    </Box>
+                    <Box sx={{ p: 3 ,
+                    display: isOpen ? "block" : "none",
+                     
+                     }}>
+                  
                     <Box
                         sx={{
                         alignItems: 'center',
@@ -63,9 +72,21 @@ export const Home = () => {
                         display: 'flex',
                         justifyContent: 'space-between',
                         mt: 2,
-                        p: '12px'
+                        p: '15px'
+                        }}
+
+                        
+                    >
+                      <Box
+                        href="/"
+                        sx={{
+                        display: 'inline-flex',
+                        height: 32,
+                        width: 32
                         }}
                     >
+                        <Logo />
+                    </Box>
                         <div>
                         <Typography
                             color="inherit"
@@ -88,7 +109,7 @@ export const Home = () => {
                         </SvgIcon>
                     </Box>
                     </Box>
-                    <Divider sx={{ borderColor: 'neutral.700' }} />
+                    <Divider sx={{ borderColor: 'neutral.700', display: isOpen ? 'block' : 'none' }} />
                     <Box
                     component="nav"
                     sx={{
@@ -108,39 +129,69 @@ export const Home = () => {
                     >
                             {
                     adminSidebarData.map((item, index)=>(
-                        <NavLink to={item.path}  key={index}   className="link" >
-                            <Stack direction="row" alignItems="center" spacing={2} sx={{ p: 2 }}>
+                        
+                        <NavLink to={item.path}  key={index} onClick={toggle}   className="link" style={{
+                            textDecoration: "none",
+                            //add hover effect
+
+                        }}>
+                        <Tooltip title={item.name} placement="right" arrow>
+                            <Stack direction="row" alignItems='center' spacing={2} sx={{ p: isOpen ? 2 : 0,
+                            ":hover": {
+                                backgroundColor: isOpen ? 'rgba(255, 255, 255, 0.04)' : 'transparent',
+                                borderRadius: 1,
+                                
+                                
+                            },                       
+                            marginBottom: isOpen ? 0 : 4  }}>
+                                <SvgIcon fontSize="small" sx={{ color: 'primary.lightest', mt: 0.5,
+                                fontSize: isOpen ? "20px" : "25px",
+                                transition: "all 0.34s ease",
+                                ":hover": {
+
+                                    color: '#dcab5e',
+
+                                }
+                                }}>
                                     {item.icon}
+                                </SvgIcon>
 
                                     <Box sx={{
                                         display: isOpen ? "block" : "none" 
                                     }}>
                                         <Typography
+                                        sx={{
+                                            display: isOpen ? "block" : "none"
+                                        }}
                                             color="primary.contrastText"
-                                            variant="subtitle2"
+
                                         >
                                             {item.name}
                                         </Typography>
                                     </Box>
                             </Stack>
+                        </Tooltip>
                        
                     </NavLink>
                     ))
                 }
                     </Stack>
                     </Box>
-                    <Divider sx={{ borderColor: 'neutral.700' }} />
+                   
 
                     </Box>
     
                
             </Box>
+
+
+
             <Box sx={{
                 width: '100%',
                 height: '100%',
-                backgroundColor: 'neutral.100',
                 p: 3
             }}>
+      
                 <Outlet/>
             </Box>
           

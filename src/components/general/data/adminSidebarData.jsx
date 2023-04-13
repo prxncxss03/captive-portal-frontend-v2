@@ -10,7 +10,7 @@ export const adminSidebarData = [
     {
         path:"/admin/dashboard",
         name:"Dashboard",
-        icon: <RiDashboardFill size={18}/>
+        icon: <RiDashboardFill size={21}/>
     },
     {
         path:"/admin/students",
@@ -20,23 +20,23 @@ export const adminSidebarData = [
     {
         path:"/admin/faculty",
         name:"Faculty",
-        icon:<FaChalkboardTeacher size={18}/>
+        icon:<FaChalkboardTeacher size={22}/>
 
     },
     {
         path:"/admin/pending-accounts",
         name:"Pending Accounts",
-        icon: <MdPendingActions size={19}/>
+        icon: <MdPendingActions size={22}/>
     },
     {
         path: "/admin/web-content-filter",
         name: "Web Content Filter",
-        icon: <MdFilterAlt size={18}/>
+        icon: <MdFilterAlt size={22}/>
 
     },
     {
         path:"/admin/settings",
         name:"Settings",
-        icon: <RiSettings4Fill size={18}/>
+        icon: <RiSettings4Fill size={22}/>
     }
 ]
