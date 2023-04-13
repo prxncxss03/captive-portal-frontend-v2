@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import {
     FaUserAlt,
     FaChalkboardTeacher,
@@ -8,7 +8,7 @@ import {
 import {MdPendingActions,MdFilterAlt} from "react-icons/md";
 import { OverviewUser } from "../../sections/overview/OverviewUser"
 import { instance } from "../../../helper/http"
-import { useOutletContext } from "react-router-dom";
+
 
 
 export const Dashboard = () => {  
@@ -42,6 +42,22 @@ export const Dashboard = () => {
     return(
         <Box style={{
             display: "flex",
+            flexDirection: "column",
+            maxWidth: "100%",
+            height: "100%",
+            flexWrap: "wrap",
+        }}>
+            <Typography variant="h4" style={{
+            marginTop: 60,
+            marginBottom: '-20px',
+            marginLeft: 70,
+
+            }}>
+                Overview
+            </Typography>
+       
+        <Box style={{
+            display: "flex",
             maxWidth: "100%",
             height: "100%",
             alignItems: "center",
@@ -55,6 +71,7 @@ export const Dashboard = () => {
             }
          
         }}>
+            
             <OverviewUser 
                 title="Total Students"
                 value={data.totalStudents}
@@ -79,5 +96,6 @@ export const Dashboard = () => {
                 icon={<MdFilterAlt />}
             />
         </Box>
+    </Box>
     )
 }

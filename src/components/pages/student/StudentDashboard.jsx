@@ -1,8 +1,9 @@
-import { Box,Typography } from "@mui/material"
+import { Box,Container,Typography } from "@mui/material"
+import { Announcement } from "../Announcement"
 export const StudentDashboard = () => {
     return(
-        <Box >
-            <Typography variant="h1">Student Dashboard</Typography>
-        </Box>
+        <Container>
+            <Announcement/>
+        </Container>
     )
 }

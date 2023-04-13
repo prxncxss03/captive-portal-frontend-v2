@@ -105,7 +105,7 @@ export const Home = () => {
                 
             }}>
                 <Logo />
-                <Typography variant="h5" sx={{marginLeft: '10px', color: BROWN}}>Admin</Typography>
+               
             </Box>
             <Box sx={{
                 display: 'flex',

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {studentSidebarData } from '../../general/data/studentSidebarData';
+import { studentSidebarData } from '../../general/data/studentSidebarData';
 import { NavLink, Navigate, Outlet,useNavigate} from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { Box, Divider, IconButton, Stack, SvgIcon, Typography,Button } from '@mui/material';
@@ -7,36 +7,43 @@ import { Logo } from '../../general/Logo';
 import {HiChevronUpDown} from "react-icons/hi2";
 import Tooltip from '@mui/material/Tooltip';
 import { BROWN } from '../../general/config';
-import { LetterAvatar } from '../../general/LetterAvatar';
 import { instance } from '../../../helper/http';
-//import { Header } from '../../sections/header/Header';
+import { LetterAvatar } from '../../general/LetterAvatar';
+
 
 export const StudentHome = () => {
     instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
     const navigate = useNavigate();
+
     const user = JSON.parse(localStorage.getItem('user'));
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [isLogout, setIsLogout] = useState(false);
 
    const toggleMenu = () => {
         setIsOpenMenu(!isOpenMenu);
+        
     }
     const[isOpenMenu ,setIsOpenMenu] = useState(false);
-    const [isShowLogout ,setIsShowLogout] = useState(false);
 
-    const handleShowLogout = () => {
-        setIsShowLogout(!isShowLogout);
+     
+      const [isShowLogout ,setIsShowLogout] = useState(false);
 
-    }
-
-    const handleLogout = () => {
-        instance.post('/api/auth/logout').then((response) => {
-            console.log(response.data.message);
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
-            navigate('/auth/login')
-        }).catch((error) => {
-            console.log(error);
-        });
+      const handleShowLogout = () => {
+          setIsShowLogout(!isShowLogout);
+  
+      }
+  
+      const handleLogout = () => {
+          instance.post('/api/auth/logout').then((response) => {
+              console.log(response.data.message);
+              localStorage.removeItem('token');
+              localStorage.removeItem('user');
+              navigate('/auth/login')
+          }).catch((error) => {
+              console.log(error);
+          });
+          
+      
         
     }
     
@@ -52,7 +59,8 @@ export const StudentHome = () => {
             
         }}>
         <Box sx={{
-            backgroundColor: 'pink',
+            backdropFilter: "blur(3px)",
+            backgroundColor:'#fff',
             position: 'absolute',
             top: '0px' ,
             right: 0,
@@ -75,7 +83,8 @@ export const StudentHome = () => {
             zIndex: 49,
             width: '100%',
             height: '100vh',
-            backgroundColor: 'rgba(0,0,0,0.5)',
+            backdropFilter: "blur(3px)",
+            backgroundColor: 'rgba(0, 0, 0, 0.2)',
             display: 'none',
             transition: 'all 0.5s ease',
             userSelect: 'none',
@@ -96,7 +105,7 @@ export const StudentHome = () => {
                 
             }}>
                 <Logo />
-                <Typography variant="h5" sx={{marginLeft: '10px', color: BROWN}}>Student</Typography>
+                
             </Box>
             <Box sx={{
                 display: 'flex',
@@ -166,10 +175,12 @@ export const StudentHome = () => {
             
             
                 <Box
+                   
                     sx={{
                     
                     flexDirection: 'column',
                     height: '100%',
+                    
                         
                     '@media screen and (max-width: 768px)': {
                  
@@ -248,7 +259,7 @@ export const StudentHome = () => {
                             {
                     studentSidebarData.map((item, index)=>(
                         
-                        <NavLink to={item.path}  key={index}   className="link" style={{
+                        <NavLink to={item.path}  key={index} className="link" style={{
                             textDecoration: "none",
                             //add hover effect
 
@@ -313,8 +324,18 @@ export const StudentHome = () => {
                 margin: isOpenMenu ? '0 0 0 330px' : '0 0 0 60px',
 
                 '@media screen and (max-width: 500px)': {
-                    display: isOpenMenu ? 'none' : 'block',
+                    display: isOpenMenu ? 'none' : 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                },    
+                '@media screen and (max-width: 453px)': {
+                    margin: isOpenMenu ? '0 0 0 330px' : '0 0 0 50px',
+                    padding: '40px 0 0 0',
+                    width: '400px',
                 }
+
+                
             }}>
       
                 <Outlet context={isOpenMenu}/>

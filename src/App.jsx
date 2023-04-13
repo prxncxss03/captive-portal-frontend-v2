@@ -14,7 +14,7 @@ import { PendingAccounts } from './components/pages/admin/PendingAccounts';
 import { WebContentFilter } from './components/pages/admin/WebContentFilter';
 import { FloatingChat } from './components/pages/Chat';
 import { useState, createContext } from "react";
-import ReactDOM from "react-dom/client";
+
 
 const SideBarContext = createContext()
 import { StudentHome } from './components/pages/student/StudentHome';
