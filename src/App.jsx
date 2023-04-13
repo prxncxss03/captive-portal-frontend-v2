@@ -12,11 +12,6 @@ import { Dashboard } from './components/pages/admin/Dashboard';
 import { PrivateRoutes } from './components/utils/PrivateRoutes';
 import { PendingAccounts } from './components/pages/admin/PendingAccounts';
 import { WebContentFilter } from './components/pages/admin/WebContentFilter';
-import { FloatingChat } from './components/pages/Chat';
-import { useState, createContext } from "react";
-
-
-const SideBarContext = createContext()
 import { StudentHome } from './components/pages/student/StudentHome';
 import { StudentDashboard } from './components/pages/student/StudentDashboard';
 
@@ -47,7 +42,7 @@ function App() {
               <Route path="/account-pending" element={<AccountPending />} />
               <Route path="/admin/faculty" element={<Faculty />} />
               <Route path="/settings" element={<Settings />} />
-              <Route path="/admin/chat" element={<FloatingChat />} />
+             
               
               <Route path="/admin/students" element={<Students />} />
               <Route path="/admin/pending-accounts" element={<PendingAccounts />} />

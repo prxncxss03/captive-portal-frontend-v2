@@ -25,7 +25,6 @@ import { PendingAccounts } from './components/pages/admin/PendingAccounts';
 import { Faculty } from './components/pages/admin/Faculty';
 import { Settings } from './components/pages/Settings';
 import { WebContentFilter } from './components/pages/admin/WebContentFilter';
-import { FloatingChat } from './components/pages/Chat';
 import { StudentHome } from './components/pages/student/StudentHome';
 import { StudentDashboard } from './components/pages/student/StudentDashboard';
  
@@ -119,10 +118,7 @@ const styles = (theme) => ({
           path: '/admin/faculty',
           element: <Faculty />
         },
-        {
-          path: '/admin/chat',
-          element: <FloatingChat />
-        },
+     
         {
           path: '/admin/settings',
           element: <Settings />
