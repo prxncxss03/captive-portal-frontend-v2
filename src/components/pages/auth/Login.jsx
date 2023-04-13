@@ -83,8 +83,6 @@ export const Login = () => {
     <>
     <Box
       sx={{
-        
-        backgroundColor: 'violet',
         flex: '1 1 auto',
         alignItems: 'center',
         display: 'flex',
