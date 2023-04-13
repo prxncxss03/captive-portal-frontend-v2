@@ -5,6 +5,7 @@ import { FaBars } from 'react-icons/fa';
 import { Box, Divider, IconButton, Stack, SvgIcon, Typography,Button } from '@mui/material';
 import { Logo } from '../../general/Logo';
 import {HiChevronUpDown} from "react-icons/hi2";
+import { Dashboard } from './Dashboard';
 
 export const Home = () => {
 
@@ -13,6 +14,7 @@ export const Home = () => {
     
     return (
         <Box sx={{
+            backgroundColor: '#ffc0cb',
             display: 'flex',
             flexDirection: 'row',
             height: '100%',
@@ -133,7 +135,15 @@ export const Home = () => {
     
                
             </Box>
-           <Outlet/>
+            <Box sx={{
+                width: '100%',
+                height: '100%',
+                backgroundColor: 'neutral.100',
+                p: 3
+            }}>
+                <Outlet/>
+            </Box>
+          
         </Box>
     );
 };

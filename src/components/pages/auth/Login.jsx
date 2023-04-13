@@ -56,7 +56,7 @@ export const Login = () => {
           console.log('token', localStorage.getItem('token'));
           localStorage.setItem('user', JSON.stringify(response.data.user));
           
-          navigate('/admin');
+          navigate('/admin/dashboard');
          
         }).catch((error) => {
           console.log(error);

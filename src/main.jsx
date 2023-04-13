@@ -18,7 +18,7 @@ import {Login} from './components/pages/auth/Login';
 import {Register} from './components/pages/auth/Register';
 import { NotFound } from './components/pages/placeholder/NotFound';
 import { AccountPending } from './components/pages/placeholder/AccountPending';
-import {Home} from './components/pages/admin/home';
+import { Home } from './components/pages/admin/Home';
 import { Students } from './components/pages/admin/Students';
 import { Dashboard } from './components/pages/admin/Dashboard';
 import { PendingAccounts } from './components/pages/admin/PendingAccounts';
@@ -82,6 +82,12 @@ export function createTheme() {
       element:<Home />
      ,
       children: [
+        {
+          path: '/admin/dashboard',
+          element: 
+            <Dashboard />
+
+        },
     
         {
           path: '/admin/students',
@@ -89,12 +95,7 @@ export function createTheme() {
             <Students />
         
         },
-        {
-          path: '/admin/dashboard',
-          element: 
-            <Dashboard />
-
-        },
+        
         {
           path: '/admin/pending-accounts',
           element:
