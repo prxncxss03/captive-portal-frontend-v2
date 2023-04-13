@@ -13,6 +13,7 @@ export const OverviewUser = ({
       <Card sx={{
         maxWidth: 350,
         margin: 2,
+        userSelect: 'none',
       }}>
       <CardContent >
         <Stack

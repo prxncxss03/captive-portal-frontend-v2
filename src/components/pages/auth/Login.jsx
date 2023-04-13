@@ -55,8 +55,14 @@ export const Login = () => {
           localStorage.setItem('token', response.data.access_token);
           console.log('token', localStorage.getItem('token'));
           localStorage.setItem('user', JSON.stringify(response.data.user));
-          
-          navigate('/admin/dashboard');
+          if (response.data.user.user_type === 'admin') {
+            navigate('/admin/dashboard');
+          } else if (response.data.user.user_type === 'student') {
+            navigate('/student/dashboard');
+          } else if (response.data.user.user_type === 'faculty') {
+            navigate('/faculty/dashboard');
+          }
+
          
         }).catch((error) => {
           console.log(error);

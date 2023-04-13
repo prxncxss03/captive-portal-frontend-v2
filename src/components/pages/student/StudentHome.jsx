@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { adminSidebarData } from '../../general/data/adminSidebarData';
+import {studentSidebarData } from '../../general/data/studentSidebarData';
 import { NavLink, Navigate, Outlet,useNavigate} from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { Box, Divider, IconButton, Stack, SvgIcon, Typography,Button } from '@mui/material';
@@ -7,29 +7,24 @@ import { Logo } from '../../general/Logo';
 import {HiChevronUpDown} from "react-icons/hi2";
 import Tooltip from '@mui/material/Tooltip';
 import { BROWN } from '../../general/config';
+import { LetterAvatar } from '../../general/LetterAvatar';
 import { PopoverLogout } from '../../sections/header/PopoverLogout';
 import { instance } from '../../../helper/http';
 //import { Header } from '../../sections/header/Header';
-import {  createContext, useContext } from "react";
 
-
-export const Home = () => {
+export const StudentHome = () => {
     instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
     const navigate = useNavigate();
-
     const user = JSON.parse(localStorage.getItem('user'));
     const [anchorEl, setAnchorEl] = React.useState(null);
 
    const toggleMenu = () => {
         setIsOpenMenu(!isOpenMenu);
-        
     }
     const[isOpenMenu ,setIsOpenMenu] = useState(false);
 
-   
+
     const handlePopoverClick = (event) => {
-        console.log("target",event.currentTarget.tagName);
-        console.log('event.currentTarget',event.currentTarget);
         setAnchorEl(event.currentTarget);
         if (event.currentTarget.tagName === "BUTTON") {
           handleLogout();
@@ -79,8 +74,6 @@ export const Home = () => {
         }}>
 
         <Box 
-
-        onClick={toggleMenu}
         sx={{
             position: 'absolute',
             top: '0px' ,
@@ -89,14 +82,10 @@ export const Home = () => {
             width: '100%',
             height: '100vh',
             backgroundColor: 'rgba(0,0,0,0.5)',
-            display: 'none',
+            display: isOpenMenu ? 'block' : 'none',
             transition: 'all 0.5s ease',
             userSelect: 'none',
             
-            //show on mobile size
-            '@media (max-width: 600px)': {
-                display: isOpenMenu ? 'block' : 'none',
-            },
         }}>
 
         </Box>
@@ -109,7 +98,7 @@ export const Home = () => {
                 
             }}>
                 <Logo />
-                <Typography variant="h5" sx={{marginLeft: '10px', color: BROWN}}>Admin</Typography>
+                <Typography variant="h5" sx={{marginLeft: '10px', color: BROWN}}>Student</Typography>
             </Box>
             <Box >
                 <PopoverLogout
@@ -157,12 +146,10 @@ export const Home = () => {
             
             
                 <Box
-                    onBackdropClick={toggleMenu}
                     sx={{
                     
                     flexDirection: 'column',
                     height: '100%',
-                    
                         
                     '@media screen and (max-width: 768px)': {
                  
@@ -239,9 +226,9 @@ export const Home = () => {
                         }}
                     >
                             {
-                    adminSidebarData.map((item, index)=>(
+                    studentSidebarData.map((item, index)=>(
                         
-                        <NavLink to={item.path}  key={index} className="link" style={{
+                        <NavLink to={item.path}  key={index}   className="link" style={{
                             textDecoration: "none",
                             //add hover effect
 
@@ -297,17 +284,10 @@ export const Home = () => {
 
 
 
-            <Box 
-              
-            sx={{
+            <Box sx={{
                 width: '100%',
                 height: '100%',
-                p: 3,
-                margin: isOpenMenu ? '0 0 0 330px' : '0 0 0 60px',
-
-                '@media screen and (max-width: 500px)': {
-                    display: isOpenMenu ? 'none' : 'block',
-                }
+                p: 3
             }}>
       
                 <Outlet context={isOpenMenu}/>

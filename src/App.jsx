@@ -12,13 +12,20 @@ import { Dashboard } from './components/pages/admin/Dashboard';
 import { PrivateRoutes } from './components/utils/PrivateRoutes';
 import { PendingAccounts } from './components/pages/admin/PendingAccounts';
 import { WebContentFilter } from './components/pages/admin/WebContentFilter';
-import { useOutletContext } from 'react-router-dom';
+import { FloatingChat } from './components/pages/Chat';
+import { useState, createContext } from "react";
+import ReactDOM from "react-dom/client";
+
+const SideBarContext = createContext()
+import { StudentHome } from './components/pages/student/StudentHome';
+import { StudentDashboard } from './components/pages/student/StudentDashboard';
 
 
 function App() {
  
-  
   return (
+    <SideBarContext.Provider value={{isOpenMenu, setIsOpenMenu}}>
+
     <Container sx={{
       height: '100vh',
       display: 'flex',
@@ -39,10 +46,15 @@ function App() {
               <Route path="/account-pending" element={<AccountPending />} />
               <Route path="/admin/faculty" element={<Faculty />} />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/admin/chat" element={<FloatingChat />} />
               
               <Route path="/admin/students" element={<Students />} />
               <Route path="/admin/pending-accounts" element={<PendingAccounts />} />
               <Route path="/admin/web-content-filter" element={<WebContentFilter />} />
+
+              <Route path="/student" element={<StudentHome />} />
+              <Route path="/student/dashboard" element={<StudentDashboard />} />
+
             </Route>
           
           <Route path="*" element={<NotFound />} />
@@ -50,6 +62,7 @@ function App() {
            
 
     </Container>
+    </SideBarContext.Provider>
     
   )
 }

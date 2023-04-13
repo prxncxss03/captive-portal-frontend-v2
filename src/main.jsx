@@ -25,6 +25,9 @@ import { PendingAccounts } from './components/pages/admin/PendingAccounts';
 import { Faculty } from './components/pages/admin/Faculty';
 import { Settings } from './components/pages/Settings';
 import { WebContentFilter } from './components/pages/admin/WebContentFilter';
+import { FloatingChat } from './components/pages/Chat';
+import { StudentHome } from './components/pages/student/StudentHome';
+import { StudentDashboard } from './components/pages/student/StudentDashboard';
  
 export function createTheme() {
   const palette = createPalette();
@@ -117,6 +120,10 @@ const styles = (theme) => ({
           element: <Faculty />
         },
         {
+          path: '/admin/chat',
+          element: <FloatingChat />
+        },
+        {
           path: '/admin/settings',
           element: <Settings />
         
@@ -124,6 +131,20 @@ const styles = (theme) => ({
         {
           path: '/admin/web-content-filter',
           element: <WebContentFilter />
+        }
+      ]
+    },
+    {
+      path: '/student',
+      element: <StudentHome />,
+      children: [
+        {
+          path: '/student/dashboard',
+          element: <StudentDashboard />
+        },
+        {
+          path: '/student/settings',
+          element: <Settings />
         }
       ]
     }
