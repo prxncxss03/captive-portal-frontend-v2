@@ -8,7 +8,7 @@ export const OverviewUser = ({
   icon,
 }) => {
 
-  
+    
     return(
       <Card sx={{
         maxWidth: 350,
@@ -65,7 +65,9 @@ export const OverviewUser = ({
           </Stack>
           <Avatar
             sx={{
-              backgroundColor: 'primary.main',
+              backgroundColor: 
+                title === 'Total Students' ? 'primary.main' : title === 'Total Faculty' ? 'info.main' : title === 'Total Pending Accounts' ? 'warning.main' : 'error.main'
+              ,
               height: 56,
               width: 56,
               '@media (max-width: 600px)': {
