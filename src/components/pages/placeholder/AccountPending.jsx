@@ -2,16 +2,19 @@ import {TbCircleArrowLeft} from "react-icons/tb";
 import { Box, Button, Container, SvgIcon, Typography } from '@mui/material';
 import progress from './../../../assets/image/placeholder/progress.png';
 import { useNavigate } from 'react-router-dom';
+import { MdMargin } from "react-icons/md";
 
 export const AccountPending = () => (
   <>
     <Box
       component="main"
       sx={{
-        alignItems: 'center',
         display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         flexGrow: 1,
-        minHeight: '100%'
+        minHeight: '100%',
+        marginTop: 20,
       }}
     >
       <Container maxWidth="md">
