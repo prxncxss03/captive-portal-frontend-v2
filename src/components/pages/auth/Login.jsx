@@ -1,6 +1,8 @@
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
+import lvlogo from './../../../assets/image/logo/lvlogo.png';
+import { Logo } from '../../general/Logo';
 import {
   Alert,
   Box,
@@ -105,8 +107,25 @@ export const Login = () => {
             spacing={1}
             sx={{ mb: 3 }}
           >
-            <Typography variant="h4">
-              Login
+            <Box sx={{
+              display: 'flex',
+              justifyContent: 'center',
+            }}>
+
+              <img src={lvlogo} alt="" 
+                style={{
+                  display: 'inline-block',
+                  maxWidth: '100%',
+                  width: 100
+                }}
+              />
+            </Box>
+            <Typography variant="h4" sx={{
+              textAlign: 'center',
+              marginTop: '12px',
+              marginBottom: '15px'
+            }}>
+              LV Captive Portal Login
             </Typography>
             <Typography
               color="text.secondary"
