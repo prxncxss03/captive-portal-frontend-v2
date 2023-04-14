@@ -89,7 +89,7 @@ import {
                       </TableCell>
                   
                       <TableCell>
-                        {user.first_name}
+                        Android, Linux
                       </TableCell>
                 
                       <TableCell>

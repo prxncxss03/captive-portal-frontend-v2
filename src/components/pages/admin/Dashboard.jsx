@@ -50,8 +50,8 @@ export const Dashboard = () => {
         }}>
             <Typography variant="h4" style={{
             marginTop: 60,
-            marginBottom: '-20px',
-            marginLeft: 70,
+            marginBottom: '20px',
+            marginLeft: '20px',
 
             }}>
                 Overview
@@ -62,13 +62,22 @@ export const Dashboard = () => {
             maxWidth: "100%",
             height: "100%",
             alignItems: "center",
-            margin: 60,
+            margin: 0,
             flexWrap: "wrap",
 
             //media query
             "@media (max-width: 600px)": {
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
                 margin: 0,
                 padding: 0,
+            },
+            "@media (max-width: 400px)": {
+                margin: '60px',
+                padding: 0,
+
+                
             }
          
         }}>

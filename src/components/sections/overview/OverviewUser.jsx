@@ -47,9 +47,10 @@ export const OverviewUser = ({
               flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
+              flexWrap: 'wrap',
               width: '100%',
-              margin: '0 -5 0 0',
-              padding: 0,
+              margin: '0 20px 0 20px',
+              padding: 2,
             }
 
           }}>
