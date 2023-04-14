@@ -129,6 +129,10 @@ export const Settings = () => {
           console.log(response.data);
           helpers.setStatus({ success: true });
           helpers.setSubmitting(false);
+          setPasswordValues({
+            new_password: '',
+            confirm_password: '',
+          })
         }).catch((error) => {
           console.log(error);
           helpers.setStatus({ success: false });
