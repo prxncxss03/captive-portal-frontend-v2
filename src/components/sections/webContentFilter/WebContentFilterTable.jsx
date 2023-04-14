@@ -21,7 +21,8 @@ export const WebContentFilterTable = (props) => {
   } = props;
 
   return (
-    <Card>
+    <Card 
+    >
         <Box sx={{ minWidth: 800 }}>
           <Table>
             <TableHead>

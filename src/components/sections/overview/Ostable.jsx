@@ -13,8 +13,8 @@ import {
 } from '@mui/material';
 import { error } from '../../../theme/colors';
 import { LetterAvatar } from '../../general/LetterAvatar';
-
-export const StudentTable = (props) => {
+import { osdata } from '../../general/data/osdata';
+export const Ostable = (props) => {
 
 
  const date = new Date();
@@ -26,39 +26,29 @@ export const StudentTable = (props) => {
   } = props;
 
   return (
-    <Card>
+    <Card sx={{
+      marginLeft: 2,
+    }}>
         <Box sx={{ minWidth: 800 }}>
           <Table>
             <TableHead>
               <TableRow>
               <TableCell>
-                  
+                   
                 </TableCell>
-                <TableCell>
-                  Name
-                </TableCell>
-                <TableCell>
-                  Email
-                </TableCell>
-                <TableCell>
-                  Joined
-                </TableCell>
+              
                 <TableCell>
                   Operating System
                 </TableCell>
                 <TableCell>
-                  Last Session
+                  No. of Users
                 </TableCell>
-                <TableCell>
-                  Status
-                </TableCell>
-                <TableCell>
-                  
-                </TableCell>
+                
+                
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((student,index) => {
+              {osdata.map((student,index) => {
                 const createdAt = "10/11/2021"
 
                 return (
@@ -75,35 +65,16 @@ export const StudentTable = (props) => {
                         direction="row"
                         spacing={2}
                       >
-                        <LetterAvatar name={student.first_name + " " + student.last_name}>
-                        </LetterAvatar>
+                        {student.icon}
                         <Typography variant="subtitle2">
-                          {student.first_name} {student.last_name}
+                          {student.name}
                         </Typography>
                       </Stack>
                     </TableCell>
                     <TableCell>
-                      {student.email}
+                      {student.count}
                     </TableCell>
-                    <TableCell>
-                        {createdAt}
-                    </TableCell>
-                    <TableCell>
-                      Mac, Android
-                    </TableCell>
-                    <TableCell>
-                      50 mins ago
-                    </TableCell>
-                    <TableCell>
-                      Active
-                    </TableCell>
-                    <TableCell>
-                      <Button variant="secondary" onClick={(e)=>onDelete(e,student.id)}>
-                        <Typography variant="subtitle2" color={error.main}>
-                          Delete
-                        </Typography>
-                      </Button>
-                    </TableCell>
+                 
                   </TableRow>
                 );
               })}

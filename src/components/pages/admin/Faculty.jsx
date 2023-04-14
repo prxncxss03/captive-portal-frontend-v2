@@ -1,6 +1,6 @@
 import {  useState,useEffect } from 'react';
 import { Box, Container, Stack,  Typography } from '@mui/material';
-import { StudentTable } from './../../sections/student/studentTable';
+import { StudentTable } from './../../sections/student/StudentTable';
 import { StudentSearch } from './../../sections/student/StudentSearch';
 import { instance } from './../../../helper/http';
 

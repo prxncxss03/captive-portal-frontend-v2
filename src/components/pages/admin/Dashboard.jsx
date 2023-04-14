@@ -8,6 +8,7 @@ import {
 import {MdPendingActions,MdFilterAlt} from "react-icons/md";
 import { OverviewUser } from "../../sections/overview/OverviewUser"
 import { instance } from "../../../helper/http"
+import { Ostable } from "../../sections/overview/Ostable";
 
 
 
@@ -92,9 +93,12 @@ export const Dashboard = () => {
 
             <OverviewUser 
                 title="Total Blocked Website"
-                value={data.totalStudents}
+                value={data.totalBlockedWebsite}
                 icon={<MdFilterAlt />}
             />
+            <Ostable>
+                
+            </Ostable>
         </Box>
     </Box>
     )

@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import { API_URL } from '../../general/config';
+import {FcGoogle} from 'react-icons/fc';
 import {  useNavigate } from 'react-router-dom';
 
 
@@ -191,21 +192,10 @@ export const Login = () => {
               >
                 
                 Continue with Google
+                <FcGoogle size={20} style={{marginLeft: '10px'}}/>
               </Button>
-              <Alert
-                color="primary"
-                severity="info"
-                sx={{ mt: 3 }}
-              >
-              {
-                /*
-                <div>
-                  You can use <b>admin@gmail.com</b> and password <b>Password123!</b>
-                </div>
-                */
-                
-              }
-              </Alert>
+              
+          
             </form>
     
         </div>

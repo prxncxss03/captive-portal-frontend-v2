@@ -4,7 +4,7 @@ import Card from '@mui/material/Card';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
-import { CardHeader, IconButton, Menu, TextField } from '@mui/material';
+import { CardHeader, IconButton, Menu, Stack, TextField } from '@mui/material';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import {IoMdAdd} from 'react-icons/io';
@@ -12,7 +12,7 @@ import {MdClose} from 'react-icons/md';
 
 const style = {
   position: 'absolute',
-  top: '35%',
+  top: '20%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: '50vw',
@@ -120,16 +120,23 @@ export function AddWebContentModal({
                   </Select>
                 </FormControl>
                 <Grid2 container spacing={3} direction={'row'} justifyContent={'flex-end'}>
-                    <Button variant="contained" color="success" onClick={(e) => onSubmit(e)}>
+                    <Stack spacing={2} direction="row" fullWidth>
+                    <Button variant="contained" color="success" onClick={(e) => onSubmit(e)} sx={{
+                     
+                    }}>
                       Add
-                      <IoMdAdd size={20} style={{marginLeft: '5px'}} />
+                      <IoMdAdd size={20} style={{marginLeft: '5px',}} />
                     </Button>
-
-               
-                    <Button variant="contained" color="error" onClick={handleModalOpen}>    
+                    <Button variant="contained" color="error" onClick={handleModalOpen} sx={{
+                      marginLeft: '5px',
+                    }}>    
                       Cancel
                       <MdClose size={20} style={{marginLeft: '5px'}} />
                     </Button>
+                    </Stack>
+
+
+               
                  
                   
                   </Grid2>

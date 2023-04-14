@@ -24,7 +24,7 @@ function App() {
     <Container sx={{
       height: '100vh',
       display: 'flex',
-      overflow: 'hidden',
+      overflow: 'auto',
 
 
     }}>

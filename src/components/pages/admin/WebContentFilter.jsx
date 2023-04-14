@@ -101,7 +101,7 @@ export const WebContentFilter = () => {
         component="main"
         sx={{
           py: 8,
-          height: '100vh',
+          height: '100%',
 
           //media query
           '@media (max-width: 600px)': {
