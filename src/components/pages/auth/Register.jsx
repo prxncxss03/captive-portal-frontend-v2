@@ -4,7 +4,6 @@ import { Box, Button,Checkbox, Link, Stack, TextField, Typography, FormControl, 
 import axios from 'axios';
 import { API_URL } from '../../general/config';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 import { sentenceCase } from '../../../helper/sentenceCase';
 import lvlogo from './../../../assets/image/logo/lvlogo.png';
 
@@ -137,7 +136,7 @@ export const Register = () => {
             <Typography variant="h4" sx={{
               textAlign: 'center',
               marginTop: '12px',
-              marginBottom: '15px'
+              paddingBottom: '20px',
             }}>
               LV Captive Portal Registration
             </Typography>

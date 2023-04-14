@@ -123,7 +123,7 @@ export const Login = () => {
             <Typography variant="h4" sx={{
               textAlign: 'center',
               marginTop: '12px',
-              marginBottom: '15px'
+              paddingBottom: '20px',
             }}>
               LV Captive Portal Login
             </Typography>
