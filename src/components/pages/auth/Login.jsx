@@ -88,7 +88,7 @@ export const Login = () => {
         alignItems: 'center',
         display: 'flex',
         width: '100%',
-        marginTop: '50px',
+        marginTop: '90px',
         justifyContent: 'center'
       }}
     >
